@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="view_product_template_sorting" model="ir.ui.view">
+      <field name="name">ir.actions.report.xml.glabels</field>
+      <field name="model">ir.actions.report.xml</field>
+      <field name="inherit_id" ref="base.act_report_xml_view" />
+      <field name="arch" type="xml">
+        <field name="attachment" position="after">
+          <field name="glabels_template" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
+        </field>
+      </field>
+    </record>
+    
+    <report string="Sample Glabels" id="action_glabels_sample_report" model="res.partner" report_type="glabels" name="report_glabels.glabels_sample_report" />
+    <record id="action_glabels_sample_report" model="ir.actions.report.xml">
+        <field name="glabels_template" type="base64" file="report_glabels/sample.glabels" />
+    </record>
+    
+
+    
+    
+    
+  </data>
+</openerp>
