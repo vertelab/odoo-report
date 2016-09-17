@@ -20,43 +20,34 @@
 ##############################################################################
 
 {
-    'name': 'Glabels Reports',
+    'name': 'Scribus Reports',
     'version': '1.0',
-    'category': 'Generic Modules',
-    'summary': 'Reports by glabels-engine',
+    'category': 'Reporting',
+    'summary': 'Reports for Scribus publishing system',
     'description': """
-        Extention of report using Glabels (http://glabels.org/). 
-        GLabels is a GNU/Linux program for creating labels and business cards. 
-        It is designed to work with various laser/ink-jet peel-off label
-        and business card sheets that you’ll find at most office supply stores. 
+        Extention of report using Scribus (http://scribus.net/). 
+        Scribus is a page layout program for GNU/Linux (also Windows and 
+        Mac OSX and others). The program supports professional publishing
+        features, such as CMYK colors, spot colors, ICC color management
+        and versatile PDF creation. Scribus produce output for professional
+        printing.
 
-        Glabels uses a template for the label design and are using a special
-        notation, ${name}, for including fields from the database. When you
-        design your labels use a dummy csv-file for your model you want 
-        to tie the report to and the format "Text: coma separated Values
-        (CSV) with keys on line 1". When the template is ready you can
-        upload it to the report-record (or include it in the xml-record if
-        you are building a module). There is a test report action that
-        also lists all fields for the choosen model.
-        
-        This module needs Glabel to be installed on the server (for Ubuntu: 
-        sudo apt install glabels)
-        
-        Test your template using glabels-batch-command:
-        glabels-3-batch -o <out-file> -l -C -i <csv-file> <your template.glabels>
-        
+        The link between Odoo and Scribus are sla-documents used as
+        templates with a notation (e-mail-template-notation), 
+        eg ${object.name}.
+                
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
     'depends': ['base'],
-    'external_dependencies': {'python': ['csv',], 'bin': ['glabels-3-batch']},
+    'external_dependencies': {'python': ['PyPDF2',], 'bin': ['scribus-ng','xvfb-run']},
     'data': [
              "report_view.xml",
              "wizard/add_print_button_view.xml",
              "wizard/remove_print_button_view.xml",
              "wizard/report_test.xml",
              ],
-    "license" : "GPL-3 or any later version",
+    "license" : "AGPL-3",
     'installable': True,
     'active': False,
     'application': True,

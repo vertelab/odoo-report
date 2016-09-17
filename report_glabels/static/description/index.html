@@ -9,9 +9,16 @@
         </div>
         <div class="oe_span6">
             <p class='oe_mt32'>
-                        GLabels is a GNU/Linux program for creating labels and business cards. 
+                 This is a new report type for Odoo, the module is an extention 
+                 that gives label/business cards designers a complement 
+                 to other report types when they creates a new report. But its easy
+                 even for non programmers to create reports using the separate GUI-client.
+                    </p>
+            <p class='oe_mt32'>
+                        <a href="http://glabels.org">GLabels</a> is a GNU/Linux program for creating labels and business cards. 
         It is designed to work with various laser/ink-jet peel-off label
         and business card sheets that you will find at most office supply stores.
+        
             </p>
         </div>
     </div>
@@ -19,7 +26,7 @@
 
 <section class="oe_container oe_dark">
     <div class="oe_row">
-        <h2 class="oe_slogan">Design Labels and Business cards</h2>
+        <h2 class="oe_slogan">Design print</h2>
         <div class="oe_span12">
             <p class='oe_mt32'>
                 Glabels uses a template for the label design and are using a special
@@ -45,7 +52,10 @@
         <p>
         This module needs Glabel to be installed on the server (for Ubuntu: 
         sudo apt install glabels)
-                
+          
+        You can test your template (and installation) using glabels-batch-command: <br/>
+        glabels-3-batch -o &lt;out-file&gt; -l -C -i &lt;csv-file&gt; &lt;your template.glabels&gt;<br/>
+        This command are alike both on workstation and server.
 
             </p>
          

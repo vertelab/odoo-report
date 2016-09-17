@@ -19,29 +19,28 @@
 #
 ##############################################################################
 from openerp import models, fields, api, _, registry
-from openerp.exceptions import except_orm, Warning, RedirectWarning
+from openerp.exceptions import Warning, MissingError
+#from openerp.exceptions import except_orm, Warning, MissingError,RedirectWarning
 
 from openerp.report import interface
+from openerp.modules import get_module_path
 
 import csv
 import os
 import tempfile
 import base64
-
+from PyPDF2 import PdfFileMerger, PdfFileReader
 
 import logging
 _logger = logging.getLogger(__name__)
 
 
-# http://jamesmcdonald.id.au/it-tips/using-gnubarcode-to-generate-a-gs1-128-barcode
-# https://github.com/zint/zint
-
 class report_xml(models.Model):
     _inherit = 'ir.actions.report.xml'
 
     ### Fields
-    report_type = fields.Selection(selection_add=[('glabels', 'Glabels')])
-    glabels_template = fields.Binary(string="Glabels template")
+    report_type = fields.Selection(selection_add=[('scribus_sla', 'Scribus SLA'),('scribus_pdf', 'Scribus PDF')])
+    scribus_template = fields.Binary(string="Scribus template")
 
     @api.cr
     def _lookup_report(self, cr, name):
@@ -49,21 +48,21 @@ class report_xml(models.Model):
             new_report = interface.report_int._reports['report.' + name]
         else:
             cr.execute("SELECT id, report_type,  \
-                        model, glabels_template  \
+                        model, scribus_template  \
                         FROM ir_act_report_xml \
                         WHERE report_name=%s", (name,))
             record = cr.dictfetchone()
-            if record['report_type'] == 'glabels':
-                template = base64.b64decode(record['glabels_template']) if record['glabels_template'] else ''
-                new_report = glabels_report(cr, 'report.%s'%name, record['model'],template=template)
+            if record['report_type'] in ['scribus_sla','scribus_pdf']:
+                template = base64.b64decode(record['scribus_template']) if record['scribus_template'] else ''
+                new_report = scribus_report(cr, 'report.%s'%name, record['model'],template=template,report_type = record['report_type'])
             else:
                 new_report = super(report_xml, self)._lookup_report(cr, name)
         return new_report
         
         
-class glabels_report(object):
+class scribus_report(object):
 
-    def __init__(self, cr, name, model, template=None ):
+    def __init__(self, cr, name, model, template=None,report_type=None ):
         _logger.info("registering %s (%s)" % (name, model))
         self.active_prints = {}
 
@@ -72,6 +71,7 @@ class glabels_report(object):
         name = name.startswith('report.') and name[7:] or name
         self.template = template
         self.model = model
+        self.report_type = report_type
         try:
             report_xml_ids = ir_obj.search(cr, 1, [('report_name', '=', name)])
             if report_xml_ids:
@@ -82,26 +82,42 @@ class glabels_report(object):
             _logger.error("Error while registering report '%s' (%s)", name, model, exc_info=True)
 
 
-    def create(self, cr, uid, ids, data, context=None):
-
-        temp = tempfile.NamedTemporaryFile(mode='w+t',suffix='.csv')
-        outfile = tempfile.NamedTemporaryFile(mode='w+b',suffix='.pdf')
-        glabels = tempfile.NamedTemporaryFile(mode='w+t',suffix='.glabels')
-        glabels.write(base64.b64decode(data.get('template')) if data.get('template') else None or self.template)
-        glabels.seek(0)
-
+    def render(self, cr, uid, record):
+        # http://jinja.pocoo.org/docs/dev/templates/#working-with-manual-escaping
         pool = registry(cr.dbname)
-        labelwriter = None
+        sla = tempfile.NamedTemporaryFile(mode='w+t',suffix='.sla')
+        sla.write(pool.get('email.template').render_template(cr,uid,self.template, self.model, record['id']).lstrip().encode('utf-8'))
+        sla.seek(0)
+        return sla
+
+    def newfilename(self):
+        outfile = tempfile.NamedTemporaryFile(mode='w+b',suffix='.pdf',delete=False)
+        filename = outfile.name
+        outfile.close
+        return filename
+
+    def create(self, cr, uid, ids, data, context=None):
+        pool = registry(cr.dbname)
+        merger = PdfFileMerger()
+        outfiles = []
         for p in pool.get(self.model).read(cr,uid,ids):
-            if not labelwriter:
-                labelwriter = csv.DictWriter(temp,p.keys())
-                labelwriter.writeheader()
-            labelwriter.writerow({k:isinstance(v, (str, unicode)) and v.encode('utf8') or v for k,v in p.items()})
-        temp.seek(0)
-        res = os.system("glabels-3-batch -o %s -l -C -i %s %s" % (outfile.name,temp.name,glabels.name))
+            outfiles.append(self.newfilename())
+            sla = self.render(cr,uid,p)
+            if self.report_type == 'scribus_sla':
+                os.unlink(outfiles[-1])
+                return (sla.read(),'sla')
+            command = "xvfb-run -a scribus-ng -ns -g %s -py %s -pa -o %s" % (sla.name,os.path.join(get_module_path('report_scribus'), 'scribus.py'),outfiles[-1])
+            _logger.info(command)
+            res = os.system(command)
+            sla.close()
+            if not os.path.exists(outfiles[-1]) or os.stat(outfiles[-1]).st_size == 0:
+                raise MissingError('There are something wrong with the template or scribus installation')
+            merger.append(PdfFileReader(file(outfiles[-1], 'rb')))
+        outfile = tempfile.NamedTemporaryFile(mode='w+b',suffix='.pdf')
+        merger.write(outfile.name)
+        for filename in outfiles:
+            os.unlink(filename)
         outfile.seek(0)
         pdf = outfile.read()
         outfile.close()
-        temp.close()
-        glabels.close()
         return (pdf,'pdf')
