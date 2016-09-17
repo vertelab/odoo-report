@@ -33,6 +33,9 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
+# http://jamesmcdonald.id.au/it-tips/using-gnubarcode-to-generate-a-gs1-128-barcode
+# https://github.com/zint/zint
+
 class report_xml(models.Model):
     _inherit = 'ir.actions.report.xml'
 

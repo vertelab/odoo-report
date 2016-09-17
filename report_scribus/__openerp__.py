@@ -22,7 +22,7 @@
 {
     'name': 'Scribus Reports',
     'version': '1.0',
-    'category': 'Generic Modules',
+    'category': 'Reporting',
     'summary': 'Reports for Scribus publishing system',
     'description': """
         Extention of report using Scribus (http://scribus.net/). 
@@ -35,22 +35,19 @@
         The link between Odoo and Scribus are sla-documents used as
         templates with a notation (e-mail-template-notation), 
         eg ${object.name}.
-        
-        At this time the batch version of Scribus is not working, so we
-        kan only produce sla-documents, not pdf. 
-        
+                
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
     'depends': ['base'],
-    #'external_dependencies': {'python': ['csv',], 'bin': ['glabels-3-batch']},
+    'external_dependencies': {'python': ['PyPDF2',], 'bin': ['scribus-ng','xvfb-run']},
     'data': [
              "report_view.xml",
              "wizard/add_print_button_view.xml",
              "wizard/remove_print_button_view.xml",
              "wizard/report_test.xml",
              ],
-    "license" : "GPL-3 or any later version",
+    "license" : "AGPL-3",
     'installable': True,
     'active': False,
     'application': True,

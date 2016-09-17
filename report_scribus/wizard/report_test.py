@@ -24,7 +24,7 @@ from openerp.exceptions import Warning
 import re
 
 class report_print_by_action(models.TransientModel):
-    _name = 'report_glabel.print_by_action'
+    _name = 'report_scribus.print_by_action'
     
     @api.multi
     def to_print(recs):
@@ -40,7 +40,7 @@ class report_print_by_action(models.TransientModel):
                 'ids': print_ids,
                 'id': print_ids[0],
                 'template': recs[0].template,
-                'report_type': 'glabels'
+                'report_type': 'scribus_sla'
                 }
         res =  {
                 'type': 'ir.actions.report.xml',
