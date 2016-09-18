@@ -42,6 +42,7 @@ class report_xml(models.Model):
     ### Fields
     report_type = fields.Selection(selection_add=[('glabels', 'Glabels')])
     glabels_template = fields.Binary(string="Glabels template")
+    label_count = fields.Integer(string="Count",default=1,help="One if you want to fill the sheet with new records, the count of labels of the sheet to fill each sheet with one record")
 
     @api.cr
     def _lookup_report(self, cr, name):
@@ -49,13 +50,13 @@ class report_xml(models.Model):
             new_report = interface.report_int._reports['report.' + name]
         else:
             cr.execute("SELECT id, report_type,  \
-                        model, glabels_template  \
+                        model, glabels_template, label_count  \
                         FROM ir_act_report_xml \
                         WHERE report_name=%s", (name,))
             record = cr.dictfetchone()
             if record['report_type'] == 'glabels':
                 template = base64.b64decode(record['glabels_template']) if record['glabels_template'] else ''
-                new_report = glabels_report(cr, 'report.%s'%name, record['model'],template=template)
+                new_report = glabels_report(cr, 'report.%s'%name, record['model'],template=template,count=record['label_count'])
             else:
                 new_report = super(report_xml, self)._lookup_report(cr, name)
         return new_report
@@ -63,7 +64,7 @@ class report_xml(models.Model):
         
 class glabels_report(object):
 
-    def __init__(self, cr, name, model, template=None ):
+    def __init__(self, cr, name, model, template=None,count=1 ):
         _logger.info("registering %s (%s)" % (name, model))
         self.active_prints = {}
 
@@ -72,6 +73,7 @@ class glabels_report(object):
         name = name.startswith('report.') and name[7:] or name
         self.template = template
         self.model = model
+        self.count = count
         try:
             report_xml_ids = ir_obj.search(cr, 1, [('report_name', '=', name)])
             if report_xml_ids:
@@ -96,7 +98,8 @@ class glabels_report(object):
             if not labelwriter:
                 labelwriter = csv.DictWriter(temp,p.keys())
                 labelwriter.writeheader()
-            labelwriter.writerow({k:isinstance(v, (str, unicode)) and v.encode('utf8') or v for k,v in p.items()})
+            for c in range(self.count):
+                labelwriter.writerow({k:isinstance(v, (str, unicode)) and v.encode('utf8') or v for k,v in p.items()})
         temp.seek(0)
         res = os.system("glabels-3-batch -o %s -l -C -i %s %s" % (outfile.name,temp.name,glabels.name))
         outfile.seek(0)

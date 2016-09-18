@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
-    <record id="view_product_template_sorting" model="ir.ui.view">
+    <record id="act_report_xml_view" model="ir.ui.view">
       <field name="name">ir.actions.report.xml.glabels</field>
       <field name="model">ir.actions.report.xml</field>
       <field name="inherit_id" ref="base.act_report_xml_view" />
       <field name="arch" type="xml">
         <field name="attachment" position="after">
           <field name="glabels_template" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
+          <field name="label_count" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
         </field>
       </field>
     </record>
