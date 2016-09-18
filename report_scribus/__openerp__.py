@@ -22,7 +22,7 @@
 {
     'name': 'Scribus Reports',
     'version': '1.2',
-    'category': 'Reprting',
+    'category': 'Reporting',
     'summary': 'Reports for Scribus publishing system',
     'description': """
         Extention of report using Scribus (http://scribus.net/). 
