@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Report Buttons'
+    'name': 'Report Buttons',
     'version': '1.2',
     'category': 'Reporting',
     'summary': 'Add Reports buttons/menu for manually added reports',

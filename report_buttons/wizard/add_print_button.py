@@ -34,11 +34,11 @@ def _reopen(self, res_id, model):
             'target': 'new',
     }
 
-class glabel_add_print_button(osv.osv_memory):
+class report_buttons_add_print_button(osv.osv_memory):
     '''
     Add Print Button
     '''
-    _name = 'report_glabel.add_print_button'
+    _name = 'report_buttons.add_print_button'
     _description = 'Add print button'
 
     def _check(self, cr, uid, context):
@@ -90,5 +90,5 @@ class glabel_add_print_button(osv.osv_memory):
         
     }
 
-glabel_add_print_button()
+report_buttons_add_print_button()
 

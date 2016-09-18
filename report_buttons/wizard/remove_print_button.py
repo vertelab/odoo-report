@@ -31,11 +31,11 @@ def _reopen(self, res_id, model):
             'target': 'new',
     }
 
-class glabel_remove_print_button(osv.osv_memory):
+class report_buttons_remove_print_button(osv.osv_memory):
     '''
     Remove Print Button
     '''
-    _name = 'report_glabel.remove_print_button'
+    _name = 'report_buttons.remove_print_button'
     _description = 'Remove print button'
 
     def default_get(self, cr, uid, fields_list, context=None):
@@ -69,5 +69,5 @@ class glabel_remove_print_button(osv.osv_memory):
         ],'State', select=True, readonly=True),
     }
 
-glabel_remove_print_button()
+report_buttons_remove_print_button()
 
