@@ -11,15 +11,5 @@
         </field>
       </field>
     </record>
-    
-    <report string="Sample Glabels" id="action_glabels_sample_report" model="res.partner" report_type="glabels" name="report_glabels.glabels_sample_report" />
-    <record id="action_glabels_sample_report" model="ir.actions.report.xml">
-        <field name="glabels_template" type="base64" file="report_glabels/sample.glabels" />
-    </record>
-    
-
-    
-    
-    
   </data>
 </openerp>

@@ -22,7 +22,7 @@
 {
     'name': 'Glabels Reports',
     'version': '1.0',
-    'category': 'Generic Modules',
+    'category': 'Reporting',
     'summary': 'Reports by glabels-engine',
     'description': """
         Extention of report using Glabels (http://glabels.org/). 
@@ -52,11 +52,10 @@
     'external_dependencies': {'python': ['csv',], 'bin': ['glabels-3-batch']},
     'data': [
              "report_view.xml",
-             "wizard/add_print_button_view.xml",
-             "wizard/remove_print_button_view.xml",
              "wizard/report_test.xml",
              ],
-    "license" : "GPL-3 or any later version",
+    'demo': ['demo_report.xml',],
+    "license" : "AGPL-3",
     'installable': True,
     'active': False,
     'application': True,

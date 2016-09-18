@@ -20,33 +20,21 @@
 ##############################################################################
 
 {
-    'name': 'Scribus Reports',
+    'name': 'Reports Buttons'
     'version': '1.1',
     'category': 'Reporting',
-    'summary': 'Reports for Scribus publishing system',
+    'summary': 'Add Reports buttons/menu for manually added reports',
     'description': """
-        Extention of report using Scribus (http://scribus.net/). 
-        Scribus is a page layout program for GNU/Linux (also Windows and 
-        Mac OSX and others). The program supports professional publishing
-        features, such as CMYK colors, spot colors, ICC color management
-        and versatile PDF creation. Scribus produce output for professional
-        printing.
-
-        The link between Odoo and Scribus are sla-documents used as
-        templates with a notation (e-mail-template-notation), 
-        eg ${object.name}.
-                
+        This module adds a function to add/remove visibility for manually 
+        added reports.
 """,
-    'images': ['images/report_scribus.png'],
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
     'depends': ['base'],
-    'external_dependencies': {'python': ['PyPDF2',], 'bin': ['scribus-ng','xvfb-run']},
     'data': [
-             "report_view.xml",
-             "wizard/report_test.xml",
+             "wizard/add_print_button_view.xml",
+             "wizard/remove_print_button_view.xml",
              ],
-    'demo': ['demo_report.xml',],
     "license" : "AGPL-3",
     'installable': True,
     'active': False,
