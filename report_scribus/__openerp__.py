@@ -21,8 +21,8 @@
 
 {
     'name': 'Scribus Reports',
-    'version': '1.1',
-    'category': 'Reporting',
+    'version': '1.2',
+    'category': 'Reprting',
     'summary': 'Reports for Scribus publishing system',
     'description': """
         Extention of report using Scribus (http://scribus.net/). 
@@ -35,12 +35,16 @@
         The link between Odoo and Scribus are sla-documents used as
         templates with a notation (e-mail-template-notation), 
         eg ${object.name}.
+        
+        sudo add-apt-repository ppa:scribus/ppa
+        sudo apt install scribus-ng xvfb
+        sudo pip install pypdf2
                 
 """,
     'images': ['images/report_scribus.png'],
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base'],
+    'depends': ['mail'],
     'external_dependencies': {'python': ['PyPDF2',], 'bin': ['scribus-ng','xvfb-run']},
     'data': [
              "report_view.xml",
