@@ -20,8 +20,8 @@
 ##############################################################################
 
 {
-    'name': 'Reports Buttons'
-    'version': '1.1',
+    'name': 'Report Buttons'
+    'version': '1.2',
     'category': 'Reporting',
     'summary': 'Add Reports buttons/menu for manually added reports',
     'description': """
@@ -38,6 +38,6 @@
     "license" : "AGPL-3",
     'installable': True,
     'active': False,
-    'application': True,
+    'application': False,
     'auto_install': False,
 }
