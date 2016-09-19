@@ -37,7 +37,7 @@
         eg ${object.name}.
         
         sudo add-apt-repository ppa:scribus/ppa
-        sudo apt install scribus-ng xvfb
+        scribus
         sudo pip install pypdf2
                 
 """,
