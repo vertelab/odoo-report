@@ -29,11 +29,14 @@ import csv
 import os
 import tempfile
 import base64
-from PyPDF2 import PdfFileMerger, PdfFileReader
 
 import logging
 _logger = logging.getLogger(__name__)
 
+try:
+    from PyPDF2 import PdfFileMerger, PdfFileReader
+except:
+    _logger.warn('PyPDF2 missing, sudo pip install pypdf2')
 
 class report_xml(models.Model):
     _inherit = 'ir.actions.report.xml'
