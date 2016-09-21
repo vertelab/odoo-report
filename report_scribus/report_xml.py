@@ -45,6 +45,7 @@ class report_xml(models.Model):
     report_type = fields.Selection(selection_add=[('scribus_sla', 'Scribus SLA'),('scribus_pdf', 'Scribus PDF')])
     scribus_template = fields.Binary(string="Scribus template")
     @api.one
+    @api.depends('report_type','report_name','name')
     def _scribus_template_name(self):
         self.scribus_template_name = self.report_name.replace(' ', '_').replace('.sla', '').lower() + '.sla'
     scribus_template_name = fields.Char(string="Scribus template name", compute='_scribus_template_name')
