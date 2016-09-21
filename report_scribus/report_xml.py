@@ -29,11 +29,14 @@ import csv
 import os
 import tempfile
 import base64
-from PyPDF2 import PdfFileMerger, PdfFileReader
 
 import logging
 _logger = logging.getLogger(__name__)
 
+try:
+    from PyPDF2 import PdfFileMerger, PdfFileReader
+except:
+    _logger.warn('PyPDF2 missing, sudo pip install pypdf2')
 
 class report_xml(models.Model):
     _inherit = 'ir.actions.report.xml'
@@ -41,6 +44,11 @@ class report_xml(models.Model):
     ### Fields
     report_type = fields.Selection(selection_add=[('scribus_sla', 'Scribus SLA'),('scribus_pdf', 'Scribus PDF')])
     scribus_template = fields.Binary(string="Scribus template")
+    @api.one
+    @api.depends('report_type','report_name','name')
+    def _scribus_template_name(self):
+        self.scribus_template_name = self.report_name.replace(' ', '_').replace('.sla', '').lower() + '.sla'
+    scribus_template_name = fields.Char(string="Scribus template name", compute='_scribus_template_name')
 
     @api.cr
     def _lookup_report(self, cr, name):
@@ -58,8 +66,8 @@ class report_xml(models.Model):
             else:
                 new_report = super(report_xml, self)._lookup_report(cr, name)
         return new_report
-        
-        
+
+
 class scribus_report(object):
 
     def __init__(self, cr, name, model, template=None,report_type=None ):
@@ -77,16 +85,16 @@ class scribus_report(object):
             if report_xml_ids:
                 report_xml = ir_obj.browse(cr, 1, report_xml_ids[0])
             else:
-                report_xml = False            
+                report_xml = False
         except Exception, e:
             _logger.error("Error while registering report '%s' (%s)", name, model, exc_info=True)
 
 
-    def render(self, cr, uid, record):
+    def render(self, cr, uid, record, template):
         # http://jinja.pocoo.org/docs/dev/templates/#working-with-manual-escaping
         pool = registry(cr.dbname)
         sla = tempfile.NamedTemporaryFile(mode='w+t',suffix='.sla')
-        sla.write(pool.get('email.template').render_template(cr,uid,self.template, self.model, record['id']).lstrip().encode('utf-8'))
+        sla.write(pool.get('email.template').render_template(cr,uid,template, self.model, record['id']).lstrip().encode('utf-8'))
         sla.seek(0)
         return sla
 
@@ -102,7 +110,7 @@ class scribus_report(object):
         outfiles = []
         for p in pool.get(self.model).read(cr,uid,ids):
             outfiles.append(self.newfilename())
-            sla = self.render(cr,uid,p)
+            sla = self.render(cr,uid,p,data['template'] or self.template)
             if self.report_type == 'scribus_sla':
                 os.unlink(outfiles[-1])
                 return (sla.read(),'sla')

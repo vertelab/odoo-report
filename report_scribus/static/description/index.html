@@ -19,6 +19,10 @@
 <a href="http://scribus.net">Scribus</a> is a page layout program that supports professional publishing features,
 such as CMYK colors, spot colors, ICC color management and versatile PDF creation.
             </p>
+             <p class='oe_mt32'>
+Reports made by Scribus can help you to build a professional pre-press workflow, where you store all print templates as long with original data within the ERP-system.
+The information department retains controll over the graphical material produced in the organisation. The produced material are accurate and have less problems at the print-shop.
+            </p>
         </div>
     </div>
 </section>
@@ -93,10 +97,11 @@ need Crops or Bleed marks, you choose this when you create your template.
         </pre>
         
         <p>
-        This module needs Scribus-ng to be installed on the server (for Ubuntu:
+        This module needs Scribus-ng (version 1.5 or later) to be installed on the server; for Ubuntu 14.04:<br/>
         sudo add-apt-repository ppa:scribus/ppa<br/>
-        sudo apt install scribus-ng)
-                
+        sudo add update<br/>
+        sudo apt install scribus-ng xvfb<br/>
+        sudo pip install pypdf2</br>
 
             </p>
          
