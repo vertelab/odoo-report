@@ -25,21 +25,22 @@
     'category': 'Reporting',
     'summary': 'Reports for Scribus publishing system',
     'description': """
-        Extention of report using Scribus (http://scribus.net/). 
-        Scribus is a page layout program for GNU/Linux (also Windows and 
+        Extention of report using Scribus (http://scribus.net/).
+        Scribus is a page layout program for GNU/Linux (also Windows and
         Mac OSX and others). The program supports professional publishing
         features, such as CMYK colors, spot colors, ICC color management
         and versatile PDF creation. Scribus produce output for professional
         printing.
 
         The link between Odoo and Scribus are sla-documents used as
-        templates with a notation (e-mail-template-notation), 
+        templates with a notation (e-mail-template-notation),
         eg ${object.name}.
-        
+
         sudo add-apt-repository ppa:scribus/ppa
-        scribus
+        sudo apt update
+        sudo apt install scribus-ng xvfb
         sudo pip install pypdf2
-                
+
 """,
     'images': ['images/report_scribus.png'],
     'author': 'Vertel AB',
