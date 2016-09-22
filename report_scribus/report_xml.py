@@ -95,7 +95,7 @@ class scribus_report(object):
         pool = registry(cr.dbname)
         sla = tempfile.NamedTemporaryFile(mode='w+t',suffix='.sla')
         _logger.error(template)
-        sla.write(pool.get('mail.template').render_template(cr,uid,template, self.model, record['id']).lstrip().encode('utf-8'))
+        sla.write(pool.get('email.template').render_template(cr,uid,template, self.model, record['id']).lstrip().encode('utf-8'))
         sla.seek(0)
         return sla
 
