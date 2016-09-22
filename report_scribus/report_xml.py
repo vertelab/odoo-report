@@ -94,7 +94,8 @@ class scribus_report(object):
         # http://jinja.pocoo.org/docs/dev/templates/#working-with-manual-escaping
         pool = registry(cr.dbname)
         sla = tempfile.NamedTemporaryFile(mode='w+t',suffix='.sla')
-        sla.write(pool.get('email.template').render_template(cr,uid,template, self.model, record['id']).lstrip().encode('utf-8'))
+        _logger.error(template)
+        sla.write(pool.get('mail.template').render_template(cr,uid,template, self.model, record['id']).lstrip().encode('utf-8'))
         sla.seek(0)
         return sla
 
@@ -110,7 +111,7 @@ class scribus_report(object):
         outfiles = []
         for p in pool.get(self.model).read(cr,uid,ids):
             outfiles.append(self.newfilename())
-            sla = self.render(cr,uid,p,data['template'] or self.template)
+            sla = self.render(cr,uid,p,data.get('template') or self.template)
             if self.report_type == 'scribus_sla':
                 os.unlink(outfiles[-1])
                 return (sla.read(),'sla')
