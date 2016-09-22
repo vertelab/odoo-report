@@ -45,7 +45,7 @@
     'images': ['images/report_scribus.png'],
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['mail'],
+    'depends': ['email_template'],
     'external_dependencies': {'python': ['PyPDF2',], 'bin': ['scribus-ng','xvfb-run']},
     'data': [
              "report_view.xml",
