@@ -39,7 +39,7 @@ class report_print_by_action(models.TransientModel):
                 'model': report.model,
                 'ids': print_ids,
                 'id': print_ids[0],
-                'template': base64.b64decode(recs[0].template),
+                'template': base64.b64decode(recs[0].template) if recs[0].template else False,
                 'report_type': 'scribus_sla'
                 }
         res =  {
