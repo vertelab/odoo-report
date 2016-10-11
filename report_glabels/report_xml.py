@@ -60,8 +60,8 @@ class report_xml(models.Model):
             else:
                 new_report = super(report_xml, self)._lookup_report(cr, name)
         return new_report
-        
-        
+
+
 class glabels_report(object):
 
     def __init__(self, cr, name, model, template=None,count=1 ):
@@ -79,7 +79,7 @@ class glabels_report(object):
             if report_xml_ids:
                 report_xml = ir_obj.browse(cr, 1, report_xml_ids[0])
             else:
-                report_xml = False            
+                report_xml = False
         except Exception, e:
             _logger.error("Error while registering report '%s' (%s)", name, model, exc_info=True)
 
@@ -99,7 +99,7 @@ class glabels_report(object):
                 labelwriter = csv.DictWriter(temp,p.keys())
                 labelwriter.writeheader()
             for c in range(self.count):
-                labelwriter.writerow({k:isinstance(v, (str, unicode)) and v.encode('utf8') or v for k,v in p.items()})
+                labelwriter.writerow({k:isinstance(v, (str, unicode)) and v.encode('utf8') or v or '' for k,v in p.items()})
         temp.seek(0)
         res = os.system("glabels-3-batch -o %s -l -C -i %s %s" % (outfile.name,temp.name,glabels.name))
         outfile.seek(0)
