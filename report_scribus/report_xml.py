@@ -110,7 +110,7 @@ class scribus_report(object):
         outfiles = []
         for p in pool.get(self.model).read(cr,uid,ids):
             outfiles.append(self.newfilename())
-            sla = self.render(cr,uid,p,data['template'] or self.template)
+            sla = self.render(cr,uid,p,data.get('template') or self.template)
             if self.report_type == 'scribus_sla':
                 os.unlink(outfiles[-1])
                 return (sla.read(),'sla')
