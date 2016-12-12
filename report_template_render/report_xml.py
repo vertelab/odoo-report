@@ -42,11 +42,12 @@ class report_xml(models.Model):
     @api.one
     @api.depends('report_type','report_name','name')
     def _template2render_name(self):
-        self.template2render_name = self.report_name.replace(' ', '_').replace('.sla', '').lower() + '.sla'
+        self.template2render_name = self.report_name.replace(' ', '_').replace('.xml', '').lower() + '.xml'
     template2render_name = fields.Char(string="Template to render name", compute='_template2render_name')
 
     @api.cr
     def _lookup_report(self, cr, name):
+        _logger.error('Lookup %s %s' (name,interface.report_int._reports))
         if 'report.' + name in interface.report_int._reports:
             new_report = interface.report_int._reports['report.' + name]
         else:
@@ -57,7 +58,7 @@ class report_xml(models.Model):
             record = cr.dictfetchone()
             if record['report_type'] in ['template_render']:
                 template = base64.b64decode(record['template2render']) if record['template2render'] else ''
-                new_report = scribus_report(cr, 'report.%s'%name, record['model'],template=template,report_type = record['report_type'])
+                new_report = template_render_report(cr, 'report.%s'%name, record['model'],template=template,report_type = record['report_type'])
             else:
                 new_report = super(report_xml, self)._lookup_report(cr, name)
         return new_report
@@ -96,6 +97,7 @@ class template_render_report(object):
     def create(self, cr, uid, ids, data, context=None):
         pool = registry(cr.dbname)
         for p in pool.get(self.model).read(cr,uid,ids):
+            _logger.error('Create: %s' % self.render(cr,uid,p,data['template'] or self.template))
             xml = self.render(cr,uid,p,data['template'] or self.template)
             document = xml.read()
             xml.close()
