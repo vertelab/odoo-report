@@ -24,7 +24,7 @@ from openerp.exceptions import Warning
 import re, base64
 
 class report_print_by_action(models.TransientModel):
-    _name = 'report_scribus.print_by_action'
+    _name = 'report_template_render.print_by_action'
 
     @api.multi
     def to_print(recs):
@@ -39,8 +39,8 @@ class report_print_by_action(models.TransientModel):
                 'model': report.model,
                 'ids': print_ids,
                 'id': print_ids[0],
-                'template': base64.b64decode(recs[0].template) if recs[0].template else False,
-                'report_type': 'scribus_sla'
+                'template': base64.b64decode(recs[0].template),
+                'report_type': 'template_render'
                 }
         res =  {
                 'type': 'ir.actions.report.xml',
