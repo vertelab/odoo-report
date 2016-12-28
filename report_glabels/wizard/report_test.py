@@ -85,13 +85,14 @@ class report_print_by_action(models.TransientModel):
             return None
         report = self.env['ir.actions.report.xml'].browse(self.env.context['active_ids'])[0]
         
-        i = 1
-        l = []
-        for k in self.env[report.model].search([])[0].read()[0].keys():
-            l.append('%s. %s' % (i,k))
-            i += 1
-        #~ raise Warning(self.env[model]._fields.keys())
-        csv = ', '.join(l)
+        #~ i = 1
+        #~ l = []
+        #~ for k in self.env[report.model].search([])[0].read()[0].keys():
+            #~ l.append('%s. %s' % (i,k))
+            #~ i += 1
+        #raise Warning(self.env[model]._fields.keys())
+        #~ csv = ', '.join(l)
+        csv = ','.join(self.env[report.model]._fields.keys())
         return csv
 
     _defaults = {
