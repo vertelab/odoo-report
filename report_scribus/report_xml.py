@@ -94,7 +94,7 @@ class scribus_report(object):
         # http://jinja.pocoo.org/docs/dev/templates/#working-with-manual-escaping
         pool = registry(cr.dbname)
         sla = tempfile.NamedTemporaryFile(mode='w+t',suffix='.sla')
-        sla.write(pool.get('mail.template').render_template(cr,uid,template, self.model, record['id']).lstrip().encode('utf-8'))
+        sla.write(pool.get('email.template').render_template(cr,uid,template, self.model, record['id']).lstrip().encode('utf-8'))
         sla.seek(0)
         return sla
 
