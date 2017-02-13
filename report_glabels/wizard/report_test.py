@@ -25,7 +25,7 @@ import re
 
 class report_print_by_action(models.TransientModel):
     _name = 'report_glabel.print_by_action'
-    
+
     @api.multi
     def to_print(recs):
         valid_input = re.match('^\s*\[?\s*((\d+)(\s*,\s*\d+)*)\s*\]?\s*$', recs[0].object_ids)
@@ -49,7 +49,7 @@ class report_print_by_action(models.TransientModel):
                 'context': recs.env.context
                 }
         return res
-    
+
     ### Fields
     name = fields.Text('Object Model', readonly=True)
     object_ids = fields.Char('Object IDs', size=250, required=True,
@@ -57,23 +57,23 @@ class report_print_by_action(models.TransientModel):
     template = fields.Binary()
     csv_fields = fields.Text()
     ### ends Fields
-        
+
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
         if self.env.context.get('active_id'):
             report = self.env['ir.actions.report.xml'].browse(self.env.context['active_ids'])
             if report.report_name == 'aeroo.printscreen.list':
                 raise Warning(_("Print Screen report does not support this functionality!"))
-        res = super(report_print_by_action, self).fields_view_get(view_id, 
+        res = super(report_print_by_action, self).fields_view_get(view_id,
             view_type, toolbar=toolbar, submenu=submenu)
         return res
-    
+
     @api.model
     def _get_model(self):
         rep_obj = self.env['ir.actions.report.xml']
         report = rep_obj.browse(self.env.context['active_ids'])
         return report[0].model
-    
+
     @api.model
     def _get_last_ids(self):
         last_call = self.search([('name','=',self._get_model()),('create_uid','=',self.env.uid)])
@@ -84,7 +84,7 @@ class report_print_by_action(models.TransientModel):
         if not self.env.context.get('active_ids'):
             return None
         report = self.env['ir.actions.report.xml'].browse(self.env.context['active_ids'])[0]
-        
+
         #~ i = 1
         #~ l = []
         #~ for k in self.env[report.model].search([])[0].read()[0].keys():
@@ -92,7 +92,7 @@ class report_print_by_action(models.TransientModel):
             #~ i += 1
         #raise Warning(self.env[model]._fields.keys())
         #~ csv = ', '.join(l)
-        csv = ','.join(self.env[report.model]._fields.keys())
+        csv = ','.join(sorted(self.env[report.model]._fields.keys()))
         return csv
 
     _defaults = {
