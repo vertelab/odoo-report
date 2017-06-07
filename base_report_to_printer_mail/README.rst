@@ -6,7 +6,7 @@
 Report to printer - Mail
 ========================
 
-This module fixes the compatibility between the Report to printer and Mail modules.
+This module fixes the compatibility between the Report to printer and Mail Templates modules.
 
 When generating an email, the report was also printed on the printer.
 With this module, the report is not sent to the printer in this case.
