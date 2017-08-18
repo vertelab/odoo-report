@@ -40,9 +40,12 @@ class report_xml(models.Model):
     _inherit = 'ir.actions.report.xml'
 
     ### Fields
-    report_type = fields.Selection(selection_add=[('glabels', 'Glabels')])
+    report_type = fields.Selection(selection_add=[('glabels', 'Glabels'),('glabels_rows', 'Glabels (rows)')])
     glabels_template = fields.Binary(string="Glabels template")
     label_count = fields.Integer(string="Count",default=1,help="One if you want to fill the sheet with new records, the count of labels of the sheet to fill each sheet with one record")
+    col_name = fields.Char(string="Column",help="(Glabels rows) the name of name column for use in gLabels")
+    col_value = fields.Char(string="Column",help="(Glabels rows) the name of value column for use in gLabels")
+    
 
     @api.cr
     def _lookup_report(self, cr, name):
@@ -57,6 +60,9 @@ class report_xml(models.Model):
             if record['report_type'] == 'glabels':
                 template = base64.b64decode(record['glabels_template']) if record['glabels_template'] else ''
                 new_report = glabels_report(cr, 'report.%s'%name, record['model'],template=template,count=record['label_count'])
+            elif record['report_type'] == 'glabels_rows':
+                template = base64.b64decode(record['glabels_template']) if record['glabels_template'] else ''
+                new_report = glabels_report_rows(cr, 'report.%s'%name, record['model'],template=template,count=record['label_count'],col_name=record['col_name'],col_value=record['col_value'])
             else:
                 new_report = super(report_xml, self)._lookup_report(cr, name)
         return new_report
@@ -64,7 +70,7 @@ class report_xml(models.Model):
 
 class glabels_report(object):
 
-    def __init__(self, cr, name, model, template=None,count=1 ):
+    def __init__(self, cr, name, model, template=None,count=1,):
         _logger.info("registering %s (%s)" % (name, model))
         self.active_prints = {}
 
@@ -100,6 +106,52 @@ class glabels_report(object):
                 labelwriter.writeheader()
             for c in range(self.count):
                 labelwriter.writerow({k:isinstance(v, (str, unicode)) and v.encode('utf8') or v or '' for k,v in p.items()})
+        temp.seek(0)
+        res = os.system("glabels-3-batch -o %s -l -C -i %s %s" % (outfile.name,temp.name,glabels.name))
+        outfile.seek(0)
+        pdf = outfile.read()
+        outfile.close()
+        temp.close()
+        glabels.close()
+        return (pdf,'pdf')
+
+class glabels_report_rows(object):
+
+    def __init__(self, cr, name, model, template=None,count=1,col_name=None,col_value=None):
+        _logger.info("registering %s (%s)" % (name, model))
+        self.active_prints = {}
+
+        pool = registry(cr.dbname)
+        ir_obj = pool.get('ir.actions.report.xml')
+        name = name.startswith('report.') and name[7:] or name
+        self.template = template
+        self.model = model
+        self.count = count
+        self.col_name = col_name
+        self.col_value = col_value
+        try:
+            report_xml_ids = ir_obj.search(cr, 1, [('report_name', '=', name)])
+            if report_xml_ids:
+                report_xml = ir_obj.browse(cr, 1, report_xml_ids[0])
+            else:
+                report_xml = False
+        except Exception, e:
+            _logger.error("Error while registering report '%s' (%s)", name, model, exc_info=True)
+
+
+    def create(self, cr, uid, ids, data, context=None):
+
+        temp = tempfile.NamedTemporaryFile(mode='w+t',suffix='.csv')
+        outfile = tempfile.NamedTemporaryFile(mode='w+b',suffix='.pdf')
+        glabels = tempfile.NamedTemporaryFile(mode='w+t',suffix='.glabels')
+        glabels.write(base64.b64decode(data.get('template')) if data.get('template') else None or self.template)
+        glabels.seek(0)
+
+        pool = registry(cr.dbname)
+        labelwriter = csv.DictWriter(temp,[h[self.col_name] for h in pool.get(self.model).read(cr,uid,pool.get(self.model).search(cr,uid,[]),[self.col_name])])
+        labelwriter.writeheader()
+        for c in range(self.count):
+            labelwriter.writerow({p[self.col_name]:isinstance(p[self.col_value], (str, unicode)) and p[self.col_value].encode('utf8') or p[self.col_value] or '' for p in pool.get(self.model).read(cr,uid,pool.get(self.model).search(cr,uid,[]),[self.col_name,self.col_value])])})
         temp.seek(0)
         res = os.system("glabels-3-batch -o %s -l -C -i %s %s" % (outfile.name,temp.name,glabels.name))
         outfile.seek(0)
