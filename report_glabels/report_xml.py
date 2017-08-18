@@ -45,7 +45,7 @@ class report_xml(models.Model):
     label_count = fields.Integer(string="Count",default=1,help="One if you want to fill the sheet with new records, the count of labels of the sheet to fill each sheet with one record")
     col_name = fields.Char(string="Column",help="(Glabels rows) the name of name column for use in gLabels")
     col_value = fields.Char(string="Column",help="(Glabels rows) the name of value column for use in gLabels")
-    
+
 
     @api.cr
     def _lookup_report(self, cr, name):
@@ -53,7 +53,7 @@ class report_xml(models.Model):
             new_report = interface.report_int._reports['report.' + name]
         else:
             cr.execute("SELECT id, report_type,  \
-                        model, glabels_template, label_count  \
+                        model, glabels_template, label_count, col_name, col_value  \
                         FROM ir_act_report_xml \
                         WHERE report_name=%s", (name,))
             record = cr.dictfetchone()
@@ -151,7 +151,8 @@ class glabels_report_rows(object):
         labelwriter = csv.DictWriter(temp,[h[self.col_name] for h in pool.get(self.model).read(cr,uid,pool.get(self.model).search(cr,uid,[]),[self.col_name])])
         labelwriter.writeheader()
         for c in range(self.count):
-            labelwriter.writerow({p[self.col_name]:isinstance(p[self.col_value], (str, unicode)) and p[self.col_value].encode('utf8') or p[self.col_value] or '' for p in pool.get(self.model).read(cr,uid,pool.get(self.model).search(cr,uid,[]),[self.col_name,self.col_value])])})
+            #~ labelwriter.writerow({p[self.col_name]:isinstance(p[self.col_value], (str, unicode)) and p[self.col_value].encode('utf8') or p[self.col_value] or '' for p in pool.get(self.model).read(cr,uid,pool.get(self.model).search(cr,uid,[]),[self.col_name,self.col_value])])})
+            labelwriter.writerow({p[self.col_name]: p[self.col_value] for p in pool.get(self.model).read(cr,uid,pool.get(self.model).search(cr,uid,[]),[self.col_name,self.col_value], context=context)})
         temp.seek(0)
         res = os.system("glabels-3-batch -o %s -l -C -i %s %s" % (outfile.name,temp.name,glabels.name))
         outfile.seek(0)
