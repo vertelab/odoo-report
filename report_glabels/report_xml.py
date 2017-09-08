@@ -23,7 +23,7 @@ from openerp.exceptions import except_orm, Warning, RedirectWarning
 
 from openerp.report import interface
 
-import csv
+import unicodecsv as csv
 import os
 import tempfile
 import base64
@@ -105,9 +105,10 @@ class glabels_report(object):
                 labelwriter = csv.DictWriter(temp,p.keys())
                 labelwriter.writeheader()
             for c in range(self.count):
-                labelwriter.writerow({k:isinstance(v, (str, unicode)) and v.encode('utf8') or v or '' for k,v in p.items()})
+                labelwriter.writerow({k:isinstance(v, (str, unicode)) and v.encode('utf8') or str(v) for k,v in p.items()})
         temp.seek(0)
         res = os.system("glabels-3-batch -o %s -l -C -i %s %s" % (outfile.name,temp.name,glabels.name))
+        
         outfile.seek(0)
         pdf = outfile.read()
         outfile.close()
@@ -152,7 +153,7 @@ class glabels_report_rows(object):
         labelwriter.writeheader()
         for c in range(self.count):
             #~ labelwriter.writerow({p[self.col_name]:isinstance(p[self.col_value], (str, unicode)) and p[self.col_value].encode('utf8') or p[self.col_value] or '' for p in pool.get(self.model).read(cr,uid,pool.get(self.model).search(cr,uid,[]),[self.col_name,self.col_value])])})
-            labelwriter.writerow({p[self.col_name]: p[self.col_value] for p in pool.get(self.model).read(cr,uid,pool.get(self.model).search(cr,uid,[]),[self.col_name,self.col_value], context=context)})
+            labelwriter.writerow({p[self.col_name]: str(p[self.col_value]) if not str(p[self.col_value]) == '0.0' else '' for p in pool.get(self.model).read(cr,uid,pool.get(self.model).search(cr,uid,[]),[self.col_name,self.col_value], context=context)})
         temp.seek(0)
         res = os.system("glabels-3-batch -o %s -l -C -i %s %s" % (outfile.name,temp.name,glabels.name))
         outfile.seek(0)
