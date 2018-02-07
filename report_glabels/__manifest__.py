@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution, third party addon
-#    Copyright (C) 2004-2016 Vertel AB (<http://vertel.se>).
+#    Odoo, Open Source Enterprise Management Solution, third party addon
+#    Copyright (C) 2004- Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -25,36 +25,36 @@
     'category': 'Reporting',
     'summary': 'Reports by glabels-engine',
     'description': """
-        Extention of report using Glabels (http://glabels.org/). 
-        GLabels is a GNU/Linux program for creating labels and business cards. 
+        Extention of report using Glabels (http://glabels.org/).
+        GLabels is a GNU/Linux program for creating labels and business cards.
         It is designed to work with various laser/ink-jet peel-off label
-        and business card sheets that you’ll find at most office supply stores. 
+        and business card sheets that you’ll find at most office supply stores.
 
         Glabels uses a template for the label design and are using a special
         notation, ${name}, for including fields from the database. When you
-        design your labels use a dummy csv-file for your model you want 
+        design your labels use a dummy csv-file for your model you want
         to tie the report to and the format "Text: coma separated Values
         (CSV) with keys on line 1". When the template is ready you can
         upload it to the report-record (or include it in the xml-record if
         you are building a module). There is a test report action that
         also lists all fields for the choosen model.
-        
-        This module needs Glabel to be installed on the server (for Ubuntu: 
+
+        This module needs Glabel to be installed on the server (for Ubuntu:
         sudo apt install glabels)
-        
+
         Test your template using glabels-batch-command:
         glabels-3-batch -o <out-file> -l -C -i <csv-file> <your template.glabels>
-        
+
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
     'depends': ['base'],
     'external_dependencies': {'python': ['csv',], 'bin': ['glabels-3-batch']},
     'data': [
-             "report_view.xml",
+             "views/report_view.xml",
              "wizard/report_test.xml",
              ],
-    'demo': ['demo_report.xml',],
+    'demo': ['demo/demo_report.xml',],
     "license" : "AGPL-3",
     'installable': True,
     'active': False,
