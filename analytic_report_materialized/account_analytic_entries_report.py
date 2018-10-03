@@ -72,12 +72,12 @@ class analytic_entries_report(models.Model):
         self.env.cr.execute("REFRESH MATERIALIZED VIEW %s" % self._table)
 
     def init(self, cr):
-        try:
-            with cr.savepoint():
-                tools.drop_view_if_exists(cr, self._table)
-        except:
-            pass
-        cr.execute("DROP MATERIALIZED VIEW IF EXISTS %s CASCADE" % (self._table,))
+        cr.execute("select * from INFORMATION_SCHEMA.views where table_name = '%s'" %self._table)
+        if cr.dictfetchall():
+            tools.drop_view_if_exists(cr, self._table)
+        cr.execute("SELECT relname FROM pg_class WHERE relkind='m' AND relname = '%s'" %self._table)
+        if cr.dictfetchall():
+            cr.execute("DROP MATERIALIZED VIEW IF EXISTS %s CASCADE" % (self._table,))
         cr.execute("""CREATE MATERIALIZED VIEW %s as (
             %s
                 FROM %s%s%s
