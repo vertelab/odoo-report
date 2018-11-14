@@ -26,7 +26,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class stock_history(models.Model):
-    _inherit = 'stock.history'
+    _inherit = 'stock_history.report'
 
     id = fields.Integer(index=True)
     product_id = fields.Many2one(index=True)
