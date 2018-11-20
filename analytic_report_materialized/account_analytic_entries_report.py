@@ -93,9 +93,8 @@ class analytic_entries_report(models.Model):
                 cr.execute("SELECT indexname FROM pg_indexes WHERE indexname = %s and tablename = %s", (indexname, self._table))
                 if not cr.dictfetchall():
                     cr.execute("CREATE INDEX %s on %s (%s)" % (indexname, self._table, col_name))
-
-    # ~ def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None, orderby=False, lazy=True):
     
-    def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None, orderby=False, lazy=True):
-        _logger.warn('\n\ndomain: %s\nfields: %s\ngroupby: %s\noffset: %s\nlimit: %s\norderby: %s\nlazy: %s' % (domain, fields, groupby, offset, limit, orderby, lazy))
-        return super(analytic_entries_report, self).read_group(self, cr, uid, domain, fields, groupby, offset=offset, limit=limit, context=context, orderby=orderby, lazy=lazy)
+    # ~ @api.model
+    # ~ def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        # ~ _logger.warn('\n\ndomain: %s\nfields: %s\ngroupby: %s\noffset: %s\nlimit: %s\norderby: %s\nlazy: %s' % (domain, fields, groupby, offset, limit, orderby, lazy))
+        # ~ return super(analytic_entries_report, self).read_group(domain, fields, groupby, offset=offset, limit=limit, orderby=orderby, lazy=lazy)

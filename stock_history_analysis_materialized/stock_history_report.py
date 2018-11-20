@@ -25,7 +25,7 @@ from openerp import tools
 import logging
 _logger = logging.getLogger(__name__)
 
-class stock_history(models.Model):
+class stock_history_report(models.Model):
     _inherit = 'stock_history.report'
 
     id = fields.Integer(index=True)
