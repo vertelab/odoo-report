@@ -4,6 +4,7 @@ import getopt
 import scribus
 
 # https://pypi.org/project/xvfbwrapper/  
+#sudo pip install xvfbwrapper
 #from xvfbwrapper import Xvfb
 #
 #with Xvfb() as xvfb:
