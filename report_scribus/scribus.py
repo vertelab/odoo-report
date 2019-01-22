@@ -4,6 +4,12 @@ import getopt
 import scribus
 
 # https://pypi.org/project/xvfbwrapper/  
+#from xvfbwrapper import Xvfb
+#
+#with Xvfb() as xvfb:
+#    # launch stuff inside virtual display here.
+#    # It starts/stops around this code block.
+    
 # print(sys.argv)
 
 text_usage = "scribus -g -py " + sys.argv[0] + " -pa -o <outputfile.pdf> -pa -t <text place holder> <inputfile.sla>"
