@@ -3,6 +3,7 @@ import sys
 import getopt
 import scribus
 
+# https://pypi.org/project/xvfbwrapper/  
 # print(sys.argv)
 
 text_usage = "scribus -g -py " + sys.argv[0] + " -pa -o <outputfile.pdf> -pa -t <text place holder> <inputfile.sla>"
