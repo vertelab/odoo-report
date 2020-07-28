@@ -18,10 +18,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api, _, registry
-from openerp.exceptions import except_orm, Warning, RedirectWarning
+from odoo import models, fields, api, _, registry
+from odoo.exceptions import Warning
 
-from openerp.report import interface
+from odoo.report import interface
 
 import unicodecsv as csv
 import os
@@ -47,24 +47,24 @@ class report_xml(models.Model):
     col_value = fields.Char(string="Column",help="(Glabels rows) the name of value column for use in gLabels")
 
 
-    @api.cr
-    def _lookup_report(self, cr, name):
+    @api.model_cr
+    def _lookup_report(self,name):
         if 'report.' + name in interface.report_int._reports:
             new_report = interface.report_int._reports['report.' + name]
         else:
-            cr.execute("SELECT id, report_type,  \
+            self._cr.execute("SELECT id, report_type,  \
                         model, glabels_template, label_count, col_name, col_value  \
                         FROM ir_act_report_xml \
                         WHERE report_name=%s", (name,))
-            record = cr.dictfetchone()
+            record = self._cr.dictfetchone()
             if record['report_type'] == 'glabels':
                 template = base64.b64decode(record['glabels_template']) if record['glabels_template'] else ''
-                new_report = glabels_report(cr, 'report.%s'%name, record['model'],template=template,count=record['label_count'])
+                new_report = glabels_report('report.%s'%name, record['model'],template=template,count=record['label_count'])
             elif record['report_type'] == 'glabels_rows':
                 template = base64.b64decode(record['glabels_template']) if record['glabels_template'] else ''
-                new_report = glabels_report_rows(cr, 'report.%s'%name, record['model'],template=template,count=record['label_count'],col_name=record['col_name'],col_value=record['col_value'])
+                new_report = glabels_report_rows('report.%s'%name, record['model'],template=template,count=record['label_count'],col_name=record['col_name'],col_value=record['col_value'])
             else:
-                new_report = super(report_xml, self)._lookup_report(cr, name)
+                new_report = super(report_xml, self)._lookup_report(name)
         return new_report
 
 
@@ -74,16 +74,16 @@ class glabels_report(object):
         _logger.info("registering %s (%s)" % (name, model))
         self.active_prints = {}
 
-        pool = registry(cr.dbname)
+        pool = registry(self._cr.dbname)
         ir_obj = pool.get('ir.actions.report.xml')
         name = name.startswith('report.') and name[7:] or name
         self.template = template
         self.model = model
         self.count = count
         try:
-            report_xml_ids = ir_obj.search(cr, 1, [('report_name', '=', name)])
+            report_xml_ids = self.env['ir.actioins.report.xml'].search([('report_name', '=', name)])
             if report_xml_ids:
-                report_xml = ir_obj.browse(cr, 1, report_xml_ids[0])
+                report_xml = self.env['ir.actioins.report.xml'].browse(report_xml_ids[0])
             else:
                 report_xml = False
         except Exception, e:
