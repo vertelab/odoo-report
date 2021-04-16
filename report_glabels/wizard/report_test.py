@@ -26,7 +26,6 @@ import re
 class report_print_by_action(models.TransientModel):
     _name = 'report_glabel.print_by_action'
 
-    @api.multi
     def to_print(recs):
         valid_input = re.match('^\s*\[?\s*((\d+)(\s*,\s*\d+)*)\s*\]?\s*$', recs[0].object_ids)
         valid_input = valid_input and valid_input.group(1) or False

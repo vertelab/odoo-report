@@ -1,3 +1,2 @@
-
-import report_xml
-import wizard
+from . import models
+from . import wizard
