@@ -24,7 +24,7 @@ allow to download sources:
 
 install dependencies:
 
-    * sudo apt install autotools-dev autoconf-archive cdbs debhelper intltool gtk-doc-tools yelp-tools libgtk-3-dev librsvg2-dev libcairo2-dev libpango1.0-dev libebook1.2-dev libiec16022-dev cmake devscripts libqrencode-dev
+    * sudo apt install autotools-dev autoconf-archive cdbs debhelper intltool gtk-doc-tools yelp-tools libgtk-3-dev librsvg2-dev libcairo2-dev libpango1.0-dev libebook1.2-dev libiec16022-dev cmake devscripts libqrencode-dev gnome-desktop3-data
 
 install annoying dependency:
 
