@@ -3,14 +3,14 @@ import sys
 import getopt
 import scribus
 
-# https://pypi.org/project/xvfbwrapper/  
+# https://pypi.org/project/xvfbwrapper/
 #sudo pip install xvfbwrapper
 #from xvfbwrapper import Xvfb
 #
 #with Xvfb() as xvfb:
 #    # launch stuff inside virtual display here.
 #    # It starts/stops around this code block.
-    
+
 # print(sys.argv)
 
 text_usage = "scribus -g -py " + sys.argv[0] + " -pa -o <outputfile.pdf> -pa -t <text place holder> <inputfile.sla>"
@@ -20,7 +20,7 @@ text_placeholder = ''
 try:
   opts, args = getopt.getopt(sys.argv[2:],"ho:t:v:",["output=", "text="])
 except getopt.GetoptError:
-  print "exceptin"
+  print("exceptin")
   print(text_usage)
   sys.exit(2)
 
@@ -33,11 +33,11 @@ for opt, arg in opts:
   elif opt in ("-t", "--text"):
      text_placeholder = arg
 
-print "pdf-file %s text %s" % (pdf_file,text_placeholder)
+print ("pdf-file %s text %s" % (pdf_file,text_placeholder))
 
 if (pdf_file == "") :
      print(text_usage)
-     print opts
+     print(opts)
      sys.exit()
 
 if scribus.haveDoc() :

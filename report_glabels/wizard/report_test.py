@@ -19,8 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from odoo import models, fields, api, _
 import re
 
 class report_print_by_action(models.TransientModel):
@@ -99,4 +98,3 @@ class report_print_by_action(models.TransientModel):
        'object_ids': _get_last_ids,
        'csv_fields': _get_csv,
     }
-

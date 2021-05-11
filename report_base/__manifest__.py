@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "odoo-stock-picking",
+    'name': "report_base",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -20,18 +20,10 @@
     'version': '14.0.0.0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'report_base'],
-    'external_dependencies': {'python': ['csv',], 'bin': ['glabels-3-batch']},
+    'depends': ['base'],
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/report_view.xml',
-        #"wizard/report_test.xml",
+        'views/views.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo_report.xml',
-    ],
-    'sequence' : 5
 }

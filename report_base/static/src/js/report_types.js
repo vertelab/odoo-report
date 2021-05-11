@@ -23,7 +23,7 @@ var WKHTMLTOPDF_MESSAGES = {
 ActionManager.include({
     _executeReportAction: function (action, options) {
         var self = this;
-        if (action.report_type !== 'glabels') {
+        if (action.report_type !== 'glabels' && action.report_type !== 'scribus_pdf' && action.report_type !== 'scribus_sla') {
             return this._super.apply(this, arguments);
         }
         return this.call('report', 'checkWkhtmltopdf').then(function (state) {
