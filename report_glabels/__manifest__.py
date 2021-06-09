@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "odoo-stock-picking",
+    'name': "Report Glabels",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as

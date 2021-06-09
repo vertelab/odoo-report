@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="assets_glabels" inherit_id="web.assets_backend">
-        <xpath expr="." position="inside"><script type="text/javascript" src="/report_glabels/static/src/js/report_types.js"></script></xpath>
+        <xpath expr="." position="inside"><script type="text/javascript" src="/report_base/static/src/js/report_types.js"></script></xpath>
     </template>
 </odoo>

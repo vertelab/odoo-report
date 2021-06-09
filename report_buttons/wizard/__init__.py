@@ -1,2 +1,0 @@
-import add_print_button
-import remove_print_button
