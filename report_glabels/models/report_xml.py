@@ -22,8 +22,8 @@ class IrActionsReport(models.Model):
 
     report_type = fields.Selection(selection_add=[
             ('glabels', 'Glabels'),
-        ], ondelete = {'glabels': 'set default'},
-        )
+        ])
+        
     glabels_template = fields.Binary(string="Glabels template")
     label_count = fields.Integer(string="Count", default=1,help = "One if you want to fill the sheet with new records, the count of labels of the sheet to fill each sheet with one record")
     col_name = fields.Char(string="Column", help = "(Glabels rows) the name of name column for use in gLabels")
@@ -53,7 +53,7 @@ class IrActionsReport(models.Model):
         glabels.close()
         return (pdf,'pdf')
 
-    def _render_qweb_pdf(self, res_ids=None, data=None):
+    def render_qweb_pdf(self, res_ids=None, data=None):
         report_type = self.report_type.lower().replace('-', '_')
         name = self._name
         if report_type == "glabels":

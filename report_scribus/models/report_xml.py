@@ -48,7 +48,6 @@ class IrActionsReport(models.Model):
         #return True
 
     def render_scribus(self, res_ids, data):
-        _logger.warning("render_scribus")
         template = base64.b64decode(self.scribus_template) if self.scribus_template else ''
 
         merger = PdfFileMerger()
@@ -77,13 +76,10 @@ class IrActionsReport(models.Model):
         outfile.close()
         return (pdf,'pdf')
 
-    def _render_qweb_pdf(self, res_ids=None, data=None):
-        _logger.warning("render_qwb_pdf")
+    def render_qweb_pdf(self, res_ids=None, data=None):
         report_type = self.report_type.lower().replace('-', '_')
         name = self._name
         if report_type == "scribus_sla" or report_type == "scribus_pdf":
             return self.render_scribus(res_ids, data)
         else:
             return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data)
-
-_logger.warning("model loaded")
