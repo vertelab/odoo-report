@@ -28,7 +28,7 @@ class IrActionsReport(models.Model):
     label_count = fields.Integer(string="Count", default=1,help = "One if you want to fill the sheet with new records, the count of labels of the sheet to fill each sheet with one record")
     col_name = fields.Char(string="Column", help = "(Glabels rows) the name of name column for use in gLabels")
     col_value = fields.Char(string="Column", help = "(Glabels rows) the name of value column for use in gLabels")
-    
+    @api.multi
     def render_glabels(self, res_ids, data):
         template = base64.b64decode(self.glabels_template) if self.glabels_template else ''
         temp = tempfile.NamedTemporaryFile(mode='w+b',suffix='.csv')
@@ -52,11 +52,11 @@ class IrActionsReport(models.Model):
         temp.close()
         glabels.close()
         return (pdf,'pdf')
-
+    @api.multi
     def render_qweb_pdf(self, res_ids=None, data=None):
         report_type = self.report_type.lower().replace('-', '_')
         name = self._name
         if report_type == "glabels":
             return self.render_glabels(res_ids, data)
         else:
-            return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data)
+            return super(IrActionsReport, self).render_qweb_pdf(res_ids, data)

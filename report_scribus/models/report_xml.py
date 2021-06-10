@@ -25,17 +25,17 @@ except:
 class IrActionsReport(models.Model):
     _inherit = 'ir.actions.report'
 
-    report_type = fields.Selection(selection_add=[('scribus_sla', 'Scribus SLA'),('scribus_pdf', 'Scribus PDF')],
-    ondelete = {'scribus_sla': 'set default', 'scribus_pdf': 'set default'})
+    report_type = fields.Selection(selection_add=[('scribus_sla', 'Scribus SLA'),('scribus_pdf', 'Scribus PDF')]
+    )
 
     scribus_template = fields.Binary(string="Scribus template")
-
+    @api.multi
     def newfilename(self):
         outfile = tempfile.NamedTemporaryFile(mode='w+b',suffix='.pdf',delete=False)
         filename = outfile.name
         outfile.close
         return filename
-
+    @api.multi
     def render(self, record, template):
         #_logger.warning(f"record: {record}")
         # http://jinja.pocoo.org/docs/dev/templates/#working-with-manual-escaping
@@ -46,7 +46,7 @@ class IrActionsReport(models.Model):
         sla.seek(0)
         return sla
         #return True
-
+    @api.multi
     def render_scribus(self, res_ids, data):
         template = base64.b64decode(self.scribus_template) if self.scribus_template else ''
 
@@ -75,11 +75,11 @@ class IrActionsReport(models.Model):
         pdf = outfile.read()
         outfile.close()
         return (pdf,'pdf')
-
+    @api.multi
     def render_qweb_pdf(self, res_ids=None, data=None):
         report_type = self.report_type.lower().replace('-', '_')
         name = self._name
         if report_type == "scribus_sla" or report_type == "scribus_pdf":
             return self.render_scribus(res_ids, data)
         else:
-            return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data)
+            return super(IrActionsReport, self).render_qweb_pdf(res_ids, data)
