@@ -59,4 +59,4 @@ class IrActionsReport(models.Model):
         if report_type == "glabels":
             return self.render_glabels(res_ids, data)
         else:
-            return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data)
+            return super(IrActionsReport, self).render_qweb_pdf(res_ids, data)

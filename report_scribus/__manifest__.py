@@ -21,14 +21,14 @@
         sudo apt install scribus-ng xvfb
         sudo pip install pypdf2
     """,
-    'author': "My Company",
-    'website': "http://www.yourcompany.com",
+    'author': "Vertel AB",
+    'website': "vertel.se",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Reporting',
-    'version': '14.0.0.0.1',
+    'version': '12.0.0.0.1',
 
     # any module necessary for this one to work correctly
     'depends': ['base', 'mail', 'report_base'],
@@ -41,8 +41,6 @@
         #"wizard/report_test.xml",
     ],
     # only loaded in demonstration mode
-    'demo': [
-        'demo/demo_report.xml',
-    ],
+
     'sequence' : 5
 }

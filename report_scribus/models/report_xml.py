@@ -81,4 +81,4 @@ class IrActionsReport(models.Model):
         if report_type == "scribus_sla" or report_type == "scribus_pdf":
             return self.render_scribus(res_ids, data)
         else:
-            return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data)
+            return super(IrActionsReport, self).render_qweb_pdf(res_ids, data)
