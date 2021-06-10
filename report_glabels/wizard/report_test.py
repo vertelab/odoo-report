@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Odoo, Open Source Enterprise Management Solution, third party addon
-#    Copyright (C) 2004- Vertel AB (<http://vertel.se>).
+#    OpenERP, Open Source Management Solution, third party addon
+#    Copyright (C) 2004-2016 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,14 +19,12 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from odoo import models, fields, api, _
 import re
 
 class report_print_by_action(models.TransientModel):
     _name = 'report_glabel.print_by_action'
 
-    @api.multi
     def to_print(recs):
         valid_input = re.match('^\s*\[?\s*((\d+)(\s*,\s*\d+)*)\s*\]?\s*$', recs[0].object_ids)
         valid_input = valid_input and valid_input.group(1) or False
@@ -100,4 +98,3 @@ class report_print_by_action(models.TransientModel):
        'object_ids': _get_last_ids,
        'csv_fields': _get_csv,
     }
-

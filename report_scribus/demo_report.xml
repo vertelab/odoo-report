@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
-  <data>    
-    <report string="Sample Scribus Report" id="action_scribus_sample_report" model="res.users" report_type="scribus_pdf" name="report_scribus.scribus_sample_report" />
-    <record id="action_scribus_sample_report" model="ir.actions.report.xml">
-        <field name="scribus_template" type="base64" file="report_scribus/sample.sla" />
-    </record>
-  </data>
-</openerp>
