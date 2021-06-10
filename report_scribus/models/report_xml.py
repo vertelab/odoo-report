@@ -25,8 +25,7 @@ except:
 class IrActionsReport(models.Model):
     _inherit = 'ir.actions.report'
 
-    report_type = fields.Selection(selection_add=[('scribus_sla', 'Scribus SLA'),('scribus_pdf', 'Scribus PDF')],
-    ondelete = {'scribus_sla': 'set default', 'scribus_pdf': 'set default'})
+    report_type = fields.Selection(selection_add=[('scribus_sla', 'Scribus SLA'),('scribus_pdf', 'Scribus PDF')]
 
     scribus_template = fields.Binary(string="Scribus template")
 
