@@ -14,7 +14,7 @@ Uninstall the packages:
 
 Download and Install the barcode package from groovy (using dpkg -i):
 
-    * barcode (0.99-4) [universe] https://ubuntu.pkgs.org/20.10/ubuntu-universe-amd64/barcode_0.99-4_amd64.deb.html
+    * barcode (0.99-4) [universe] https://bugs.launchpad.net/ubuntu/+source/barcode/0.99-4
 
 allow to download sources:
 
