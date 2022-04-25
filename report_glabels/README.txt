@@ -8,7 +8,7 @@ links:
 
 Uninstall the packages:
 
-    * barcode (0.99-3) [universe]
+    * barcode (0.99-3) [universe] https://linux-packages.com/ubuntu-focal-fossa/package/barcode
     * glabels (3.4.1-1.2) [universe]
     * glabels-data (3.4.1-1.2) [universe]
 
