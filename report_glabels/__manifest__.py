@@ -32,7 +32,7 @@
     #'sequence': '1'
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-report/report-glabels',
-    'images': ['/static/description/banner.png'], # 560x280 px.
+    'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
@@ -53,3 +53,4 @@
     ],
     'sequence' : 5
 }
+# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
