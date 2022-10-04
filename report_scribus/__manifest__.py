@@ -28,7 +28,10 @@
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Project',
-    'description': '',
+    'description': """
+    Reports for Scribus publishing system.
+    - Adds scribus template to report.
+    """,
     #'sequence': '1'
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-report/report_scribus',
