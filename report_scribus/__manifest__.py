@@ -29,20 +29,6 @@
     # for the full list
     'category': 'Project',
     'description': """
-    Reports for Scribus publishing system.
-    - Adds scribus template to report.
-    """,
-    #'sequence': '1'
-    'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-report/report_scribus',
-    'images': ['static/description/banner.png'], # 560x280 px.
-    'license': 'AGPL-3',
-    'contributor': '',
-    'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-report',
-
-
-    'description': """
         Extention of report using Scribus (http://scribus.net/).
         Scribus is a page layout program for GNU/Linux (also Windows and
         Mac OSX and others). The program supports professional publishing
@@ -59,6 +45,15 @@
         sudo apt install scribus-ng xvfb
         sudo pip install pypdf2
     """,
+    #'sequence': '1',
+    'author': 'Vertel AB',
+    'website': 'https://vertel.se/apps/odoo-report/report_scribus',
+    'images': ['static/description/banner.png'], # 560x280 px.
+    'license': 'AGPL-3',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-report',
+
     # any module necessary for this one to work correctly
     'depends': ['base', 'mail', 'report_base'],
     'external_dependencies': {'python': ['PyPDF2',], 'bin': ['scribus-ng','xvfb-run']},
