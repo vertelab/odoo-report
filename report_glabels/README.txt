@@ -8,13 +8,13 @@ links:
 
 Uninstall the packages:
 
-    * barcode (0.99-3) [universe]
+    * barcode (0.99-3) [universe] https://linux-packages.com/ubuntu-focal-fossa/package/barcode
     * glabels (3.4.1-1.2) [universe]
     * glabels-data (3.4.1-1.2) [universe]
 
 Download and Install the barcode package from groovy (using dpkg -i):
 
-    * barcode (0.99-4) [universe] https://ubuntu.pkgs.org/20.10/ubuntu-universe-amd64/barcode_0.99-4_amd64.deb.html
+    * barcode (0.99-4) [universe] https://bugs.launchpad.net/ubuntu/+source/barcode/0.99-4
 
 allow to download sources:
 
