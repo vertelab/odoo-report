@@ -20,6 +20,9 @@ _logger = logging.getLogger(__name__)
 class IrActionsReport(models.Model):
     _inherit = 'ir.actions.report'
 
+    def _get_csv_fields(self):
+        self.csv_fields = ','.join(sorted(self.env[self.model]._fields.keys()))
+
     report_type = fields.Selection(selection_add=[
             ('glabels', 'Glabels'),
         ], ondelete = {'glabels': 'set default'},
@@ -28,6 +31,7 @@ class IrActionsReport(models.Model):
     label_count = fields.Integer(string="Count", default=1,help = "One if you want to fill the sheet with new records, the count of labels of the sheet to fill each sheet with one record")
     col_name = fields.Char(string="Column", help = "(Glabels rows) the name of name column for use in gLabels")
     col_value = fields.Char(string="Column", help = "(Glabels rows) the name of value column for use in gLabels")
+    csv_fields = fields.Text(compute="_get_csv_fields")
     
     def render_glabels(self, res_ids, data):
         template = base64.b64decode(self.glabels_template) if self.glabels_template else ''

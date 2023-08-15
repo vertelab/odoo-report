@@ -8,8 +8,9 @@
         <field name="attachment" position="after">
           <field name="glabels_template" attrs="{'invisible':[('report_type','not in', ['glabels', 'glabels_rows'])]}" />
           <field name="label_count" attrs="{'invisible':[('report_type','not in', ['glabels','glabels_rows'])]}" />
-          <field name="col_name" attrs="{'invisible':[('report_type','not in', ['glabels_rows'])]}" />
-          <field name="col_value" attrs="{'invisible':[('report_type','not in', ['glabels_rows'])]}" />
+          <field name="col_name" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
+          <field name="col_value" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
+          <field name="csv_fields" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
         </field>
       </field>
     </record>
