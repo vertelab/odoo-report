@@ -40,7 +40,7 @@
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-report',
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base_setup'],
     # always loaded
     'data': [
         'views/views.xml',
