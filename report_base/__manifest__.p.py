@@ -21,7 +21,11 @@
 
 {
     'name': 'Report: Base',
+    # #if VERSION >= "16.0"
     'version': '1.1',
+    # #elif VERSION == "14.0"
+    'version': '1.0',
+    # #endif
     'summary': 'Adds report type for glabel.',
     'category': 'Project',
     'description': """
@@ -36,7 +40,11 @@
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-report',
     # any module necessary for this one to work correctly
+    # #if VERSION >= "16.0"
     'depends': ['base_setup'],
+    # #elif VERSION == "14.0"
+    'depends': ['base'],
+    # #endif
     # always loaded
     'data': [
         'views/views.xml',
