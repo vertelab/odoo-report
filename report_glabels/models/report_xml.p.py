@@ -25,7 +25,7 @@ class IrActionsReport(models.Model):
             ('glabels', 'Glabels'),
         ], ondelete = {'glabels': 'set default'},
         )
-    # #endif#
+    # #endif
     glabels_template = fields.Binary(string="Glabels template")
     label_count = fields.Integer(string="Count", default=1,help = "One if you want to fill the sheet with new records, the count of labels of the sheet to fill each sheet with one record")
     col_name = fields.Char(string="Column", help = "(Glabels rows) the name of name column for use in gLabels")
@@ -86,7 +86,7 @@ class IrActionsReport(models.Model):
             return (pdf,'pdf')
         else:
             raise UserError("No glabel template has been selected.")
-    # #endif#
+    # #endif
 
     # #if VERSION >= "16.0"
     def _render_qweb_pdf(self, report_ref, res_ids=None, data=None):
@@ -102,4 +102,4 @@ class IrActionsReport(models.Model):
             return self.render_glabels(res_ids, data)
         else:
             return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data)
-    # #endif#
+    # #endif

@@ -21,3 +21,30 @@
 {
     'name': 'Report: Glabels',
     'version': '1.1',
+    'summary': 'Add features to gLabel.',
+    'category': 'Project',
+    'description': """
+    Add fields to gLabel. Add template, count, column name and column value.
+    """,
+    #'sequence': '1'
+    'author': 'Vertel AB',
+    'website': 'https://vertel.se/apps/odoo-report/report_glabels',
+    'images': ['static/description/banner.png'], # 560x280 px.
+    'license': 'AGPL-3',
+    'contributor': '',
+    'maintainer': 'Vertel AB',
+    'repository': 'https://github.com/vertelab/odoo-report',
+    # any module necessary for this one to work correctly
+    'depends': ['base', 'report_base'],
+    'external_dependencies': {'python': ['csv',], 'bin': ['glabels-3-batch']},
+    'data': [
+        'views/report_view.xml',
+        #"wizard/report_test.xml",
+    ],
+    # only loaded in demonstration mode
+    'demo': [
+        #'demo/demo_report.xml',
+    ],
+    'sequence' : 5
+}
+# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
