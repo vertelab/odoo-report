@@ -21,7 +21,6 @@
 {
     'name': 'Report: Glabels',
     'version': '1.0',
-    # #endif#
     'summary': 'Add features to gLabel.',
     'category': 'Project',
     'description': """
@@ -45,7 +44,6 @@
     # only loaded in demonstration mode
     'demo': [
         'demo/demo_report.xml',
-        # #endif#
     ],
     'sequence' : 5
 }

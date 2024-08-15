@@ -24,7 +24,7 @@
     'version': '1.1',
     # #elif VERSION == "14.0"
     'version': '1.0',
-    # #endif#
+    # #endif
     'summary': 'Add features to gLabel.',
     'category': 'Project',
     'description': """
@@ -51,7 +51,7 @@
         #'demo/demo_report.xml',
         # #elif VERSION == "14.0"
         'demo/demo_report.xml',
-        # #endif#
+        # #endif
     ],
     'sequence' : 5
 }
