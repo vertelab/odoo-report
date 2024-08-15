@@ -6,11 +6,19 @@
       <field name="inherit_id" ref="base.act_report_xml_view" />
       <field name="arch" type="xml">
         <field name="attachment" position="after">
-          <field name="glabels_template" invisible="report_type not in ['glabels', 'glabels_rows']" />
-          <field name="label_count" invisible="report_type not in ['glabels', 'glabels_rows']" />
-          <field name="col_name" invisible="report_type not in ['glabels']" />
-          <field name="col_value" invisible="report_type not in ['glabels']" />
-          <field name="csv_fields" invisible="report_type not in ['glabels']" />
+          # #if VERSION == "16.0"
+          <field name="glabels_template" attrs="{'invisible':[('fake_report_type','not in', ['glabels', 'glabels_rows'])]}" />
+          <field name="label_count" attrs="{'invisible':[('fake_report_type','not in', ['glabels','glabels_rows'])]}" />
+          <field name="col_name" attrs="{'invisible':[('fake_report_type','not in', ['glabels'])]}" />
+          <field name="col_value" attrs="{'invisible':[('fake_report_type','not in', ['glabels'])]}" />
+          <field name="csv_fields" attrs="{'invisible':[('fake_report_type','not in', ['glabels'])]}" />
+          # #elif VERSION == "14.0"
+          <field name="glabels_template" attrs="{'invisible':[('report_type','not in', ['glabels', 'glabels_rows'])]}" />
+          <field name="label_count" attrs="{'invisible':[('report_type','not in', ['glabels','glabels_rows'])]}" />
+          <field name="col_name" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
+          <field name="col_value" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
+          <field name="csv_fields" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
+          # #endif#
         </field>
       </field>
     </record>

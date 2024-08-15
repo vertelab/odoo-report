@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
@@ -21,38 +20,4 @@
 
 {
     'name': 'Report: Glabels',
-    'version': '17.0.0.0.1',
-    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': 'Add features to gLabel.',
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
-    'category': 'Project',
-    'description': """
-    Add fields to gLabel. Add template, count, column name and column value.
-    """,
-    #'sequence': '1'
-    'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-report/report_glabels',
-    'images': ['static/description/banner.png'], # 560x280 px.
-    'license': 'AGPL-3',
-    'contributor': '',
-    'maintainer': 'Vertel AB',
-    'repository': 'https://github.com/vertelab/odoo-report',
-    # any module necessary for this one to work correctly
-    'depends': ['base', 'report_base'],
-    'external_dependencies': {'python': ['csv',], 'bin': ['glabels-3-batch']},
-
-    # always loaded
-    'data': [
-        # 'security/ir.model.access.csv',
-        'views/report_view.xml',
-        #"wizard/report_test.xml",
-    ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo_report.xml',
-    ],
-    'sequence' : 5
-}
-# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
+    'version': '1.1',
