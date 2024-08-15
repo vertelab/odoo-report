@@ -18,6 +18,9 @@ class IrActionsReport(models.Model):
 
     def _get_csv_fields(self):
         self.csv_fields = ','.join(sorted(self.env[self.model]._fields.keys()))
+    # #if VERSION >= "16.0"
+    fake_report_type = fields.Selection(selection_add=[
+    # #elif VERSION == "14.0"
     report_type = fields.Selection(selection_add=[
             ('glabels', 'Glabels'),
         ], ondelete = {'glabels': 'set default'},
@@ -29,6 +32,34 @@ class IrActionsReport(models.Model):
     col_value = fields.Char(string="Column", help = "(Glabels rows) the name of value column for use in gLabels")
     csv_fields = fields.Text(compute="_get_csv_fields")
     
+    # #if VERSION >= "16.0"
+    def render_glabels(self, report_ref, res_ids, data):
+        if self._get_report(report_ref).glabels_template:
+            template = base64.b64decode(self._get_report(report_ref).glabels_template) 
+            temp = tempfile.NamedTemporaryFile(mode='w+b',suffix='.csv')
+            outfile = tempfile.NamedTemporaryFile(mode='w+b',suffix='.pdf')
+            glabels = tempfile.NamedTemporaryFile(mode='w+b',suffix='.glabels')
+            glabels.write(template)
+            glabels.seek(0)
+            labelwriter = None
+            for p in self.env.get(self._get_report(report_ref).model).browse(res_ids).read():
+                if not labelwriter:
+                    labelwriter = csv.DictWriter(temp,p.keys())
+                    labelwriter.writeheader()
+                    
+                for c in range(self._get_report(report_ref).label_count):
+                    labelwriter.writerow({k:isinstance(v, str) and v or str(v) for k,v in p.items()})
+            temp.seek(0)
+            res = os.system("glabels-3-batch -o %s -l -C -i %s %s" % (outfile.name,temp.name,glabels.name))
+            outfile.seek(0)
+            pdf = outfile.read()
+            outfile.close()
+            temp.close()
+            glabels.close()
+            return (pdf,'pdf')
+        else:
+            raise UserError("No glabel template has been selected.")  
+    # #elif VERSION == "14.0"
     def render_glabels(self, res_ids, data):
         if self.glabels_template:
             template = base64.b64decode(self.glabels_template)
@@ -57,6 +88,13 @@ class IrActionsReport(models.Model):
             raise UserError("No glabel template has been selected.")
     # #endif#
 
+    # #if VERSION >= "16.0"
+    def _render_qweb_pdf(self, report_ref, res_ids=None, data=None):
+        if self._get_report(report_ref).fake_report_type.lower().replace('-', '_') == 'glabels':
+            return self.render_glabels(report_ref,res_ids, data)
+        else:
+            return super(IrActionsReport, self)._render_qweb_pdf(report_ref, res_ids=res_ids, data=data)
+    # #elif VERSION == "14.0"
     def _render_qweb_pdf(self, res_ids=None, data=None):
         report_type = self.report_type.lower().replace('-', '_')
         name = self._name

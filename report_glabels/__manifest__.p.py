@@ -20,6 +20,9 @@
 
 {
     'name': 'Report: Glabels',
+    # #if VERSION >= "16.0"
+    'version': '1.1',
+    # #elif VERSION == "14.0"
     'version': '1.0',
     # #endif#
     'summary': 'Add features to gLabel.',
@@ -44,6 +47,9 @@
     ],
     # only loaded in demonstration mode
     'demo': [
+        # #if VERSION >= "16.0"
+        #'demo/demo_report.xml',
+        # #elif VERSION == "14.0"
         'demo/demo_report.xml',
         # #endif#
     ],
