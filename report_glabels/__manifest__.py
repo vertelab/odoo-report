@@ -21,12 +21,8 @@
 
 {
     'name': 'Report: Glabels',
-    'version': '17.0.0.0.1',
-    # Version ledger: 14.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
+    'version': '1.1',
     'summary': 'Add features to gLabel.',
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
     'category': 'Project',
     'description': """
     Add fields to gLabel. Add template, count, column name and column value.
@@ -42,16 +38,13 @@
     # any module necessary for this one to work correctly
     'depends': ['base', 'report_base'],
     'external_dependencies': {'python': ['csv',], 'bin': ['glabels-3-batch']},
-
-    # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
         'views/report_view.xml',
         #"wizard/report_test.xml",
     ],
     # only loaded in demonstration mode
     'demo': [
-        'demo/demo_report.xml',
+        # 'demo/demo_report.xml',
     ],
     'sequence' : 5
 }
