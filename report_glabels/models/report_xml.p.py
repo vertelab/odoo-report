@@ -22,10 +22,10 @@ class IrActionsReport(models.Model):
     fake_report_type = fields.Selection(selection_add=[
     # #elif VERSION == "14.0"
     report_type = fields.Selection(selection_add=[
+    # #endif
             ('glabels', 'Glabels'),
         ], ondelete = {'glabels': 'set default'},
         )
-    # #endif
     glabels_template = fields.Binary(string="Glabels template")
     label_count = fields.Integer(string="Count", default=1,help = "One if you want to fill the sheet with new records, the count of labels of the sheet to fill each sheet with one record")
     col_name = fields.Char(string="Column", help = "(Glabels rows) the name of name column for use in gLabels")
