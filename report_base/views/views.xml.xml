@@ -1,3 +1,7 @@
 
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <template id="assets_backend" name="gLabels assets backend" inherit_id="web.assets_backend_legacy_lazy">
+        <xpath expr="." position="inside"><script type="text/javascript" src="/report_base/static/src/js/report_types.js"></script></xpath>
+    </template>
+</odoo>
