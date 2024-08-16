@@ -40,6 +40,7 @@
     # always loaded
     'data': [
         'views/views.xml',
+        'views/act_report_xml_view.xml'
     ],
 }
 # vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
