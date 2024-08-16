@@ -48,6 +48,9 @@
     # always loaded
     'data': [
         'views/views.xml',
+        # #if VERSION >= "16.0"
+        'views/act_report_xml_view.xml'
+        # #endif
     ],
 }
 # vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
