@@ -1,4 +1,4 @@
-from odoo.exceptions import except_orm, Warning, RedirectWarning, UserError
+from odoo.exceptions import UserError#, except_orm, Warning, RedirectWarning,
 
 from odoo import models, fields, api, http, registry
 import unicodecsv as csv

@@ -6,6 +6,11 @@
       <field name="inherit_id" ref="base.act_report_xml_view" />
       <field name="arch" type="xml">
         <field name="attachment" position="after">
+          <field name="glabels_template" invisible="fake_report_type not in ['glabels', 'glabels_rows']" />
+          <field name="label_count" invisible="fake_report_type not in ['glabels', 'glabels_rows']" />
+          <field name="col_name" invisible="fake_report_type not in ['glabels']" />
+          <field name="col_value" invisible="fake_report_type not in ['glabels']" />
+          <field name="csv_fields" invisible="fake_report_type not in ['glabels']" />
         </field>
       </field>
     </record>
