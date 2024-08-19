@@ -37,7 +37,7 @@
     'repository': 'https://github.com/vertelab/odoo-report',
     # any module necessary for this one to work correctly
     'depends': ['base_setup'],
-    'external_dependencies': {'python': ['unicodecsv',]},
+    'external_dependencies': {'python': ['unicodecsv']},
     # always loaded
     'data': [
         #'views/views.xml',
