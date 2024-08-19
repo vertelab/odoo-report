@@ -37,7 +37,6 @@
     # any module necessary for this one to work correctly
     # always loaded
     'data': [
-        'views/views.xml',
     ],
 }
 # vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
