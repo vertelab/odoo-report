@@ -1,4 +1,8 @@
+# #if VERSION >= 17.0
+from odoo.exceptions import UserError
+# #elif VERSION == "14.0" or VERSION == "16.0"
 from odoo.exceptions import except_orm, Warning, RedirectWarning, UserError
+# #endif
 
 from odoo import models, fields, api, http, registry
 import unicodecsv as csv

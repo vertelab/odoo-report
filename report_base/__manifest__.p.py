@@ -42,14 +42,17 @@
     # any module necessary for this one to work correctly
     # #if VERSION >= "16.0"
     'depends': ['base_setup'],
+    'external_dependencies': {'python': ['unicodecsv']},
     # #elif VERSION == "14.0"
     'depends': ['base'],
     # #endif
     # always loaded
     'data': [
-        'views/views.xml',
         # #if VERSION >= "16.0"
+        #'views/views.xml',
         'views/act_report_xml_view.xml'
+        # #elif VERSION == "14.0"
+        'views/views.xml',
         # #endif
     ],
 }
