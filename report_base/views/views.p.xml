@@ -1,6 +1,7 @@
+<!-- #if VERSION == "16.0" or VERSION == "14.0" -->
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- #if VERSION >= "16.0" -->
+    <!-- #if VERSION == 16.0 -->
     <template id="assets_backend" name="gLabels assets backend" inherit_id="web.assets_backend_legacy_lazy">
     <!-- #elif VERSION == " 14.0" -->
     <template id="assets_glabels" name="gLabels assets backend" inherit_id="web.assets_backend">
@@ -8,3 +9,4 @@
         <xpath expr="." position="inside"><script type="text/javascript" src="/report_base/static/src/js/report_types.js"></script></xpath>
     </template>
 </odoo>
+<!-- #endif -->
