@@ -1,6 +1,6 @@
 # #if VERSION >= "16.0"
 # #if VERSION == "16.0"
-fromodoo.exceptions import except_orm, Warning, RedirectWarning
+from odoo.exceptions import except_orm, Warning, RedirectWarning
 # #endif
 
 from odoo import models, fields, api, http, registry
