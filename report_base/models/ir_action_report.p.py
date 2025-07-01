@@ -1,4 +1,4 @@
-# #if VERSION >= "16.0"
+# #if VERSION >= "17.0"
 # #if VERSION == "16.0"
 from odoo.exceptions import except_orm, Warning, RedirectWarning
 # #endif
@@ -17,7 +17,11 @@ class IrActionsReport(models.Model):
     
     _inherit = 'ir.actions.report'
 
-    fake_report_type = fields.Selection([('qweb-html', 'HTML'),('qweb-pdf', 'PDF'),('qweb-text', 'Text')], string="Report Type", required=True, default='qweb-pdf',
+    fake_report_type = fields.Selection([
+        ('qweb-html', 'HTML'),
+        ('qweb-pdf', 'PDF'),
+        ('qweb-text', 'Text')
+    ], string="Report Type", required=True, default='qweb-pdf',
     help='The type of the report that will be rendered, each one having its own'
         ' rendering method. HTML means the report will be opened directly in your'
         ' browser PDF means the report will be rendered using Wkhtmltopdf and'
