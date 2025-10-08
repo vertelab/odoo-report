@@ -202,7 +202,7 @@ msgstr "Enskilt ID eller flera kommaseparerade"
 #: field:report_glabel.add_print_button,state:0
 #: field:report_glabel.remove_print_button,state:0
 msgid "State"
-msgstr "Status"
+msgstr "Läge"
 
 #. module: report_glabels
 #: field:report_glabel.print_by_action,template:0
