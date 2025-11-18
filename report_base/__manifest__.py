@@ -39,7 +39,7 @@
     'depends': ['base'],
     # always loaded
     'data': [
-        'views/views.xml',
+        # 'views/views.xml',
     ],
 }
 # vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:

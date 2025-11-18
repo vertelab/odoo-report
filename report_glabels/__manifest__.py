@@ -45,6 +45,11 @@
     'demo': [
         'demo/demo_report.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'report_glabels/static/src/js/report_glabels.js',
+        ],
+    },
     'sequence' : 5
 }
 # vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:

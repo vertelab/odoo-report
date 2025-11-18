@@ -18,10 +18,11 @@ class IrActionsReport(models.Model):
 
     def _get_csv_fields(self):
         self.csv_fields = ','.join(sorted(self.env[self.model]._fields.keys()))
-    report_type = fields.Selection(selection_add=[
-            ('glabels', 'Glabels'),
-        ], ondelete = {'glabels': 'set default'},
-        )
+
+    report_type = fields.Selection(
+        selection_add=[('qweb-glabels', 'Glabels')],
+        ondelete={'qweb-glabels': 'set default'}
+    )
     glabels_template = fields.Binary(string="Glabels template")
     label_count = fields.Integer(string="Count", default=1,help = "One if you want to fill the sheet with new records, the count of labels of the sheet to fill each sheet with one record")
     col_name = fields.Char(string="Column", help = "(Glabels rows) the name of name column for use in gLabels")
@@ -55,10 +56,11 @@ class IrActionsReport(models.Model):
         else:
             raise UserError("No glabel template has been selected.")
 
-    def _render_qweb_pdf(self, res_ids=None, data=None):
-        report_type = self.report_type.lower().replace('-', '_')
-        name = self._name
-        if report_type == "glabels":
-            return self.render_glabels(res_ids, data)
-        else:
-            return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data)
+    @api.model
+    def _render_qweb_glabels(self, report_ref, res_ids=None, data=None):
+        """This method is called when report_type is 'qweb-scribus'"""
+        if not data:
+            data = {}
+        data.setdefault('report_type', 'glabels')
+        report_id = self._get_report(report_ref)
+        return self.render_glabels(report_id, res_ids, data)
