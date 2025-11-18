@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
@@ -20,40 +19,45 @@
 ##############################################################################
 
 {
-    'name': 'Report: Base',
+    'name': 'Report: Glabels',
     # #if VERSION >= "16.0"
     'version': '1.1',
     # #elif VERSION == "14.0"
     'version': '1.0',
     # #endif
-    'summary': 'Adds report type for glabel.',
+    'summary': 'Add features to gLabel.',
     'category': 'Project',
     'description': """
-    Adds report type to back-end.
+    Add fields to gLabel. Add template, count, column name and column value.
     """,
     #'sequence': '1'
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/odoo-report/report_base',
+    'website': 'https://vertel.se/apps/odoo-report/report_glabels',
     'images': ['static/description/banner.png'], # 560x280 px.
     'license': 'AGPL-3',
     'contributor': '',
     'maintainer': 'Vertel AB',
     'repository': 'https://github.com/vertelab/odoo-report',
     # any module necessary for this one to work correctly
-    # #if VERSION >= "16.0"
-    'depends': ['base_setup'],
-    'external_dependencies': {'python': ['unicodecsv']},
-    # #elif VERSION == "14.0"
-    'depends': ['base'],
-    # #endif
-    # always loaded
+    'depends': ['base', 'report_base'],
+    'external_dependencies': {'python': ['csv',], 'bin': ['glabels-3-batch']},
     'data': [
+        'views/report_view.xml',
+        #"wizard/report_test.xml",
+    ],
+    # only loaded in demonstration mode
+    'demo': [
         # #if VERSION >= "16.0"
-        #'views/views.xml',
-        # 'views/act_report_xml_view.xml'
+        #'demo/demo_report.xml',
         # #elif VERSION == "14.0"
-        # 'views/views.xml',
+        'demo/demo_report.xml',
         # #endif
     ],
+    'assets': {
+        'web.assets_backend': [
+            'report_glabels/static/src/js/report_glabels.js',
+        ],
+    },
+    'sequence' : 5
 }
 # vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
