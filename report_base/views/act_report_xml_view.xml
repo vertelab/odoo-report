@@ -5,11 +5,8 @@
         <field name="model">ir.actions.report</field>
         <field name="inherit_id" ref="base.act_report_xml_view" />
         <field name="arch" type="xml">
-            <field name="report_type" position="replace">
-                <field name="report_type" invisible="1"/>
-            </field>
             <field name="report_type" position="after">
-                <field name="fake_report_type"/>
+                <field name="fake_report_type" invisible="1"/>
             </field>
         </field>
     </record>

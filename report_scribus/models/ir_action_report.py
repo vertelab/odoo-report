@@ -14,8 +14,6 @@ import traceback
 
 _logger = logging.getLogger(__name__)
 
-_logger.warning("loading model")
-
 try:
     from PyPDF2 import PdfFileMerger, PdfFileReader
 except:
@@ -25,23 +23,26 @@ except:
 class IrActionsReport(models.Model):
     _inherit = 'ir.actions.report'
 
-    fake_report_type = fields.Selection(
-        selection_add=[('scribus_sla', 'Scribus SLA'), ('scribus_pdf', 'Scribus PDF')],
-        ondelete={'scribus_sla': 'set default', 'scribus_pdf': 'set default'}
+    report_type = fields.Selection(
+        selection_add=[('qweb-scribus', 'Scribus')],
+        ondelete={'qweb-scribus': 'set default'}
     )
+
+    scribus_output_format = fields.Selection([
+        ('sla', 'SLA'),
+        ('pdf', 'PDF')
+    ], string="Scribus Output", default='pdf')
 
     scribus_template = fields.Binary(string="Scribus template")
 
     def newfilename(self):
-        # Changed delete=False so the file persists until we manually delete it
         outfile = tempfile.NamedTemporaryFile(mode='w+b', suffix='.pdf', delete=False)
         filename = outfile.name
-        outfile.close()  # Added () to actually call close
+        outfile.close()
         return filename
 
     def render(self, report_id, record, template):
         """Render Scribus template with proper Odoo context"""
-
         try:
             # Get the actual record object
             obj = self.env[report_id.model].browse(record["id"])
@@ -67,18 +68,7 @@ class IrActionsReport(models.Model):
                     return ''
 
             rendered = re.sub(r'\$\{([^}]+)\}', safe_replace, template)
-
-            # For SLA return type, use StringIO
-            if report_id.fake_report_type == 'scribus_sla':
-                return io.StringIO(rendered)
-
-            # For PDF generation, Scribus needs a real file
-            sla = tempfile.NamedTemporaryFile(mode='w+t', suffix='.sla', delete=False)
-            sla.write(rendered)
-            sla.flush()
-            sla.seek(0)
-
-            return sla
+            return rendered
 
         except Exception as e:
             _logger.error(f"Error rendering Scribus template: {str(e)}")
@@ -91,16 +81,13 @@ class IrActionsReport(models.Model):
         if not template:
             raise UserError('No Scribus template defined for this report')
 
-        # Handle SLA output (no PDF generation needed)
-        if report_id.fake_report_type == 'scribus_sla':
+        if report_id.scribus_output_format == 'sla':
             sla_contents = []
             for p in self.env[report_id.model].browse(res_ids).read():
-                sla = self.render(report_id, p, template)
-                content = sla.getvalue()  # Get string from StringIO
-                sla.close()
-                sla_contents.append(content)
+                rendered_content = self.render(report_id, p, template)
+                sla_contents.append(rendered_content)
 
-            # Return first SLA or concatenated SLAs
+            # Return concatenated SLAs as BYTES
             final_content = sla_contents[0] if len(sla_contents) == 1 else '\n\n'.join(sla_contents)
             return (final_content.encode('utf-8'), 'sla')
 
@@ -112,17 +99,22 @@ class IrActionsReport(models.Model):
         try:
             for p in self.env[report_id.model].browse(res_ids).read():
                 outfiles.append(self.newfilename())
-                sla = self.render(report_id, p, template)
-                sla_files.append(sla.name)
+                rendered_content = self.render(report_id, p, template)
+
+                # Write rendered content to file for PDF processing
+                sla_file = tempfile.NamedTemporaryFile(mode='w+t', suffix='.sla', delete=False)
+                sla_file.write(rendered_content)
+                sla_file.flush()
+                sla_files.append(sla_file.name)
+                sla_file.close()
 
                 command = "xvfb-run -a scribus -ns -g %s -py %s -pa -o %s" % (
-                    sla.name,
+                    sla_file.name,
                     os.path.join(get_module_path('report_scribus'), 'scribus.py'),
                     outfiles[-1]
                 )
                 _logger.info(f"Executing: {command}")
                 res = os.system(command)
-                sla.close()
 
                 if not os.path.exists(outfiles[-1]) or os.stat(outfiles[-1]).st_size == 0:
                     _logger.error(f"Scribus command failed with exit code: {res}")
@@ -136,7 +128,6 @@ class IrActionsReport(models.Model):
             merger.write(outfile.name)
             outfile.seek(0)
             pdf = outfile.read()
-
             return (pdf, 'pdf')
 
         finally:
@@ -162,10 +153,11 @@ class IrActionsReport(models.Model):
             except Exception as e:
                 _logger.warning(f"Could not delete output file: {e}")
 
-    def _render_qweb_pdf(self, report_ref, res_ids=None, data=None):
+    @api.model
+    def _render_qweb_scribus(self, report_ref, res_ids=None, data=None):
+        """This method is called when report_type is 'qweb-scribus'"""
+        if not data:
+            data = {}
+        data.setdefault('report_type', 'scribus')
         report_id = self._get_report(report_ref)
-        report_type = report_id.fake_report_type.lower().replace('-', '_')
-        if report_type == "scribus_sla" or report_type == "scribus_pdf":
-            return self.render_scribus(report_id, res_ids, data)
-        else:
-            return super(IrActionsReport, self)._render_qweb_pdf(report_ref, res_ids, data)
+        return self.render_scribus(report_id, res_ids, data)

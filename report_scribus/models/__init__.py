@@ -1,1 +1,1 @@
-from . import report_xml
+from . import ir_action_report

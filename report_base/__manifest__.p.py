@@ -50,9 +50,9 @@
     'data': [
         # #if VERSION >= "16.0"
         #'views/views.xml',
-        'views/act_report_xml_view.xml'
+        # 'views/act_report_xml_view.xml'
         # #elif VERSION == "14.0"
-        'views/views.xml',
+        # 'views/views.xml',
         # #endif
     ],
 }

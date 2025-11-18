@@ -60,5 +60,10 @@
     'demo': [
         'demo/demo_report.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'report_scribus/static/src/js/report_scribus.js',
+        ],
+    },
     'sequence' : 5
 }

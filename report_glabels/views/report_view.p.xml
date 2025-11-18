@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="act_report_xml_view" model="ir.ui.view">
-      <field name="name">ir.actions.report.xml.glabels</field>
-      <field name="model">ir.actions.report</field>
-      <field name="inherit_id" ref="base.act_report_xml_view" />
-      <field name="arch" type="xml">
-        <field name="attachment" position="after">
-          <!-- #if VERSION >= "17.0" -->
-          <field name="glabels_template" invisible="fake_report_type not in ['glabels', 'glabels_rows']" />
-          <field name="label_count" invisible="fake_report_type not in ['glabels', 'glabels_rows']" />
-          <field name="col_name" invisible="fake_report_type not in ['glabels']" />
-          <field name="col_value" invisible="fake_report_type not in ['glabels']" />
-          <field name="csv_fields" invisible="fake_report_type not in ['glabels']" />
-          <!-- #elif VERSION == "16.0" -->
-          <field name="glabels_template" attrs="{'invisible':[('fake_report_type','not in', ['glabels', 'glabels_rows'])]}" />
-          <field name="label_count" attrs="{'invisible':[('fake_report_type','not in', ['glabels','glabels_rows'])]}" />
-          <field name="col_name" attrs="{'invisible':[('fake_report_type','not in', ['glabels'])]}" />
-          <field name="col_value" attrs="{'invisible':[('fake_report_type','not in', ['glabels'])]}" />
-          <field name="csv_fields" attrs="{'invisible':[('fake_report_type','not in', ['glabels'])]}" />
-          <!-- #elif VERSION == "14.0" -->
-          <field name="glabels_template" attrs="{'invisible':[('report_type','not in', ['glabels', 'glabels_rows'])]}" />
-          <field name="label_count" attrs="{'invisible':[('report_type','not in', ['glabels','glabels_rows'])]}" />
-          <field name="col_name" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
-          <field name="col_value" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
-          <field name="csv_fields" attrs="{'invisible':[('report_type','not in', ['glabels'])]}" />
-          <!-- #endif -->
+        <field name="name">ir.actions.report.xml.glabels</field>
+        <field name="model">ir.actions.report</field>
+        <field name="inherit_id" ref="base.act_report_xml_view" />
+        <field name="arch" type="xml">
+            <field name="attachment" position="after">
+                <!-- #if VERSION >= "17.0" -->
+                <field name="glabels_template" invisible="report_type not in ['qweb-glabels', 'glabels_rows']" />
+                <field name="label_count" invisible="report_type not in ['qweb-glabels', 'glabels_rows']" />
+                <field name="col_name" invisible="report_type not in ['qweb-glabels']" />
+                <field name="col_value" invisible="report_type not in ['qweb-glabels']" />
+                <field name="csv_fields" invisible="report_type not in ['qweb-glabels']" />
+                <!-- #elif VERSION == "16.0" -->
+                <field name="glabels_template" attrs="{'invisible':[('report_type','not in', ['qweb-glabels', 'glabels_rows'])]}" />
+                <field name="label_count" attrs="{'invisible':[('report_type','not in', ['qweb-glabels','glabels_rows'])]}" />
+                <field name="col_name" attrs="{'invisible':[('report_type','not in', ['qweb-glabels'])]}" />
+                <field name="col_value" attrs="{'invisible':[('report_type','not in', ['qweb-glabels'])]}" />
+                <field name="csv_fields" attrs="{'invisible':[('report_type','not in', ['qweb-glabels'])]}" />
+                <!-- #elif VERSION == "14.0" -->
+                <field name="glabels_template" attrs="{'invisible':[('report_type','not in', ['qweb-glabels', 'glabels_rows'])]}" />
+                <field name="label_count" attrs="{'invisible':[('report_type','not in', ['qweb-glabels','glabels_rows'])]}" />
+                <field name="col_name" attrs="{'invisible':[('report_type','not in', ['qweb-glabels'])]}" />
+                <field name="col_value" attrs="{'invisible':[('report_type','not in', ['qweb-glabels'])]}" />
+                <field name="csv_fields" attrs="{'invisible':[('report_type','not in', ['qweb-glabels'])]}" />
+                <!-- #endif -->
+            </field>
         </field>
-      </field>
     </record>
 </odoo>
