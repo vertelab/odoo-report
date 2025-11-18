@@ -1,4 +1,3 @@
-from odoo.exceptions import except_orm, Warning, RedirectWarning, UserError
 
 from odoo import models, fields, api, http, registry
 import unicodecsv as csv
@@ -18,9 +17,11 @@ class IrActionsReport(models.Model):
 
     def _get_csv_fields(self):
         self.csv_fields = ','.join(sorted(self.env[self.model]._fields.keys()))
-            ('glabels', 'Glabels'),
-        ], ondelete = {'glabels': 'set default'},
-        )
+
+    report_type = fields.Selection(
+        selection_add=[('qweb-glabels', 'Glabels')],
+        ondelete={'qweb-glabels': 'set default'}
+    )
     glabels_template = fields.Binary(string="Glabels template")
     label_count = fields.Integer(string="Count", default=1,help = "One if you want to fill the sheet with new records, the count of labels of the sheet to fill each sheet with one record")
     col_name = fields.Char(string="Column", help = "(Glabels rows) the name of name column for use in gLabels")
@@ -28,3 +29,11 @@ class IrActionsReport(models.Model):
     csv_fields = fields.Text(compute="_get_csv_fields")
     
 
+    @api.model
+    def _render_qweb_glabels(self, report_ref, res_ids=None, data=None):
+        """This method is called when report_type is 'qweb-scribus'"""
+        if not data:
+            data = {}
+        data.setdefault('report_type', 'glabels')
+        report_id = self._get_report(report_ref)
+        return self.render_glabels(report_id, res_ids, data)
