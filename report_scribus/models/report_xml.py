@@ -32,14 +32,17 @@ class IrActionsReport(models.Model):
     scribus_template = fields.Binary(string="Scribus template")
 
     def newfilename(self):
-        outfile = tempfile.NamedTemporaryFile(mode='w+b',suffix='.pdf',delete=True)
+        outfile = tempfile.NamedTemporaryFile(mode='w+b',suffix='.pdf',delete=False)
         filename = outfile.name
         outfile.close
         return filename
 
     def render(self, report_id, record, template):
-        sla = tempfile.NamedTemporaryFile(mode='w+t',suffix='.sla',delete=True)
-        sla.write(self.env['mail.template']._render_template(template, report_id.model, [record["id"]])[record['id']].lstrip())
+        sla = tempfile.NamedTemporaryFile(mode='w+t',suffix='.sla',delete=False)
+        file = self.env['mail.template']._render_template(template, report_id.model, [record["id"]])[record['id']].lstrip()
+        _logger.error(f"{file=}")
+        _logger.error(f"{template=}")
+        sla.write(file)
         sla.seek(0)
         return sla
 
