@@ -42,7 +42,6 @@ class IrActionsReport(models.Model):
         return filename
 
     def render(self, report_id, record, template):
-        """Render Scribus template with proper Odoo context"""
         try:
             # Get the actual record object
             obj = self.env[report_id.model].browse(record["id"])
@@ -155,7 +154,6 @@ class IrActionsReport(models.Model):
 
     @api.model
     def _render_qweb_scribus(self, report_ref, res_ids=None, data=None):
-        """This method is called when report_type is 'qweb-scribus'"""
         if not data:
             data = {}
         data.setdefault('report_type', 'scribus')
