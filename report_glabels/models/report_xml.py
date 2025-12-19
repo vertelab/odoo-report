@@ -14,6 +14,8 @@ import unicodecsv as csv
 
 _logger = logging.getLogger(__name__)
 
+# http://jamesmcdonald.id.au/it-tips/using-gnubarcode-to-generate-a-gs1-128-barcode
+# https://github.com/zint/zint
 
 class IrActionsReport(models.Model):
     _inherit = 'ir.actions.report'
