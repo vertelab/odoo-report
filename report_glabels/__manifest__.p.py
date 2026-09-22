@@ -21,7 +21,7 @@
 {
     'name': 'Report: Glabels',
     # #if VERSION >= "16.0"
-    'version': '1.1',
+    'version': '1.2',
     # #elif VERSION == "14.0"
     'version': '1.0',
     # #endif

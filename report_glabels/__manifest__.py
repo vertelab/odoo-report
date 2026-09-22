@@ -20,7 +20,7 @@
 
 {
     'name': 'Report: Glabels',
-    'version': '1.1',
+    'version': '1.2',
     'summary': 'Add features to gLabel.',
     'category': 'Project',
     'description': """
