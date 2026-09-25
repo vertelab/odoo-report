@@ -20,12 +20,22 @@
 
 {
     'name': 'Report: Glabels',
-    'version': '1.1',
+    'version': '18.0.1.1.0',
     'summary': 'Add features to gLabel.',
     'category': 'Project',
-    'description': """
+    'description': '''
+Glabels
+=======
+
     Add fields to gLabel. Add template, count, column name and column value.
-    """,
+
+    Features:
+
+        - Web integration: Exposes HTTP endpoints for external systems.
+        - Guided Wizards: Step-by-step dialogs for data entry.
+        - UI Integration: Extends 2 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     #'sequence': '1'
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-report/report_glabels',

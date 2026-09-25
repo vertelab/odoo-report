@@ -21,12 +21,20 @@
 
 {
     'name': 'Report: Base',
-    'version': '1.1',
+    'version': '18.0.1.1.0',
     'summary': 'Adds report type for glabel.',
     'category': 'Project',
-    'description': """
-    Adds report type to back-end.
-    """,
+    'description': '''
+Base
+====
+
+    Adds report type for glabel.
+
+    Features:
+
+        - UI Integration: Extends 4 view(s) in the Odoo interface.
+        - Extends Odoo: Builds on existing Odoo models.
+    ''',
     #'sequence': '1'
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-report/report_base',
