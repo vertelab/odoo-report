@@ -8,7 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 from io import BytesIO
 from PIL import Image
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo import models, fields, api
 import unicodecsv as csv
 
@@ -34,6 +34,47 @@ class IrActionsReport(models.Model):
     col_name = fields.Char(string="Column")
     col_value = fields.Char(string="Column")
     csv_fields = fields.Text(compute="_get_csv_fields")
+
+    @api.constrains('glabels_template')
+    def _check_glabels_template(self):
+        """Reject uploads that are not valid .glabels files.
+
+        gLabels saves templates as gzipped XML, but plain XML is also
+        accepted by glabels-3-batch. Anything else (a CSV, a PDF, an
+        image) would only fail later, in render_glabels(), with a
+        confusing error — so catch it at upload time instead.
+        """
+        for report in self:
+            if not report.glabels_template:
+                continue
+
+            data = report.glabels_template
+            if isinstance(data, str):
+                data = data.encode()
+
+            # Binary fields are base64-encoded at rest in the ORM.
+            if data[:2] != b'\x1f\x8b':
+                try:
+                    data = base64.b64decode(data, validate=True)
+                except Exception:
+                    pass
+
+            if data[:2] == b'\x1f\x8b':
+                try:
+                    inner = gzip.decompress(data)
+                except OSError:
+                    raise ValidationError(
+                        "The gzipped .glabels template could not be decompressed."
+                    )
+            else:
+                inner = data
+
+            if b'Glabels-document' not in inner and b'<?xml' not in inner:
+                raise ValidationError(
+                    "The file in 'Glabels template' is not a valid .glabels file.\n"
+                    "Upload a .glabels file saved from gLabels (gzipped XML) or "
+                    "a plain XML .glabels file — not a CSV, PDF or image."
+                )
 
     def _process_image_field(self, field_name, field_value, record_id, temp_dir):
         try:
@@ -152,12 +193,20 @@ class IrActionsReport(models.Model):
                 writer = csv.DictWriter(csv_temp, fieldnames=fieldnames)
                 writer.writeheader()
                 writer.writerows(records_data)
-                csv_temp.close()
+            # Close it even when there were no records, otherwise the file
+            # stays open and the CSV handed to glabels-3-batch is empty.
+            csv_temp.close()
 
-            # Modify the glabels template to use our CSV
-            # Read glabels file (gzipped XML)
-            with gzip.open(glabels_temp.name, 'rb') as f:
-                xml_content = f.read().decode('utf-8')
+            # Modify the glabels template to use our CSV.
+            # The template may be gzipped (as gLabels saves it) or plain XML
+            # (hand-edited or produced by other tools). glabels-3-batch
+            # accepts both, so detect the format instead of assuming gzip.
+            with open(glabels_temp.name, 'rb') as f:
+                raw_template = f.read()
+            if raw_template[:2] == b'\x1f\x8b':  # gzip magic
+                xml_content = gzip.decompress(raw_template).decode('utf-8')
+            else:
+                xml_content = raw_template.decode('utf-8')
 
             # Parse and modify XML
             root = ET.fromstring(xml_content)
@@ -203,8 +252,15 @@ class IrActionsReport(models.Model):
             return (pdf, 'pdf')
 
         except Exception as e:
-            _logger.error(f"Error: {e}", exc_info=True)
-            raise UserError(f"Failed to generate report: {str(e)}")
+            _logger.error(
+                "render_glabels failed for report %s: %s", report.id, e, exc_info=True
+            )
+            raise UserError(
+                "Could not generate the label: %s\n\n"
+                "Check that the 'Glabels template' field contains a valid "
+                ".glabels file (gzipped or plain XML) — not a CSV or other "
+                "file." % e
+            )
 
         finally:
             # Cleanup temp files
@@ -212,13 +268,21 @@ class IrActionsReport(models.Model):
                 try:
                     if os.path.exists(temp_file):
                         os.unlink(temp_file)
-                except:
+                except OSError:
                     pass
             try:
                 if 'modified_glabels' in locals():
                     os.unlink(modified_glabels.name)
-            except:
+            except OSError:
                 pass
+            # Remove the images extracted for this run; they are written to
+            # a persistent directory and would otherwise accumulate.
+            for img_path in temp_image_files:
+                try:
+                    if os.path.exists(img_path):
+                        os.unlink(img_path)
+                except OSError:
+                    pass
 
     @api.model
     def _render_qweb_glabels(self, report_ref, res_ids=None, data=None):
