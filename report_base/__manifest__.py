@@ -21,20 +21,12 @@
 
 {
     'name': 'Report: Base',
-    'version': '18.0.1.1.0',
+    'version': '1.1',
     'summary': 'Adds report type for glabel.',
     'category': 'Project',
-    'description': '''
-Base
-====
-
-    Adds report type for glabel.
-
-    Features:
-
-        - UI Integration: Extends 4 view(s) in the Odoo interface.
-        - Extends Odoo: Builds on existing Odoo models.
-    ''',
+    'description': """
+    Adds report type to back-end.
+    """,
     #'sequence': '1'
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-report/report_base',
@@ -52,3 +44,4 @@ Base
         # 'views/act_report_xml_view.xml'
     ],
 }
+# vim:expandtab:smartindent:tabstop=4s:softtabstop=4:shiftwidth=4:
