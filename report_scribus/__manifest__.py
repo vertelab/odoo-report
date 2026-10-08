@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo SA, Open Source Management Solution, third party addon
-#    Copyright (C) 2021- Vertel AB (<https://vertel.se>).
+#    Copyright (C) 2021- Vertel Sverige AB (<https://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,45 +21,36 @@
 
 {
     'name': 'Report: Scribus Reports',
-    'version': '18.0.1.0.0',
+    'version': '0.1',
     # Version ledger: XX.0 = Odoo version. 1 = Major. Non regressionable code. 2 = Minor. New features that are regressionable. 3 = Bug fixes
-    'summary': 'Reports for Scribus publishing system.',
+    'summary': 'Reports for Scribus publishing system',
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Project',
-    'description': '''
-Scribus Reports
-===============
+    'description': """
+        Extention of report using Scribus (http://scribus.net/).
+        Scribus is a page layout program for GNU/Linux (also Windows and
+        Mac OSX and others). The program supports professional publishing
+        features, such as CMYK colors, spot colors, ICC color management
+        and versatile PDF creation. Scribus produce output for professional
+        printing.
 
-    Extention of report using Scribus (http://scribus.net/).
-            Scribus is a page layout program for GNU/Linux (also Windows and
-            Mac OSX and others). The program supports professional publishing
-            features, such as CMYK colors, spot colors, ICC color management
-            and versatile PDF creation. Scribus produce output for professional
-            printing.
+        The link between Odoo and Scribus are sla-documents used as
+        templates with a notation (e-mail-template-notation),
+        eg ${object.name}.
 
-    The link between Odoo and Scribus are sla-documents used as
-            templates with a notation (e-mail-template-notation),
-            eg ${object.name}.
-
-    sudo add-apt-repository ppa:scribus/ppa
-            sudo apt update
-            sudo apt install scribus xvfb
-            sudo pip install pypdf2
-
-    Features:
-
-        - Web integration: Exposes HTTP endpoints for external systems.
-        - UI Integration: Extends 1 view(s) in the Odoo interface.
-        - Extends Odoo: Builds on existing Odoo models.
-    ''',
-    'author': 'Vertel AB',
+        sudo add-apt-repository ppa:scribus/ppa
+        sudo apt update
+        sudo apt install scribus xvfb
+        sudo pip install pypdf2
+    """,
+    'author': 'Vertel Sverige AB',
     'website': 'https://vertel.se/apps/odoo-report/report_scribus',
     'images': ['static/description/banner.png'],
     'license': 'AGPL-3',
     'contributor': '',
-    'maintainer': 'Vertel AB',
+    'maintainer': 'Vertel Sverige AB',
     'repository': 'https://github.com/vertelab/odoo-report',
     'depends': ['base', 'mail', 'report_base'],
     'external_dependencies': {'python': ['PyPDF2',], 'bin': ['scribus','xvfb-run']},
