@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Sale Order: replace portal content with PDF viewer -->
+    <template id="sale_order_portal_pdf" inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//div[@id='introduction']" position="replace"/>
+        <xpath expr="//div[@id='content']" position="replace">
+            <div class="o_portal_pdf_frame mt-3">
+                <div class="o_portal_pdf_page">
+                    <div class="o_portal_pdf_content">
+                        <div class="col-12">
+                            <div class="pdf-container d-flex justify-content-center align-items-center py-3">
+                                <div t-att-data-pdf-url="'/report/pdf/sale.report_saleorder/%s?access_token=%s' % (sale_order.id, access_token)"
+                                     class="o_portal_pdf_viewer" style="width: 100%;"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Invoice: replace portal content with PDF viewer -->
+    <template id="account_invoice_portal_pdf" inherit_id="account.portal_invoice_page">
+        <xpath expr="//div[@id='invoice_content']" position="replace">
+            <div class="o_portal_pdf_frame mt-3">
+                <div class="o_portal_pdf_page">
+                    <div class="o_portal_pdf_content">
+                        <div class="col-12">
+                            <div class="pdf-container d-flex justify-content-center align-items-center py-3">
+                                <div t-att-data-pdf-url="'/report/pdf/account.report_invoice/%s?access_token=%s' % (invoice.id, access_token)"
+                                     class="o_portal_pdf_viewer" style="width: 100%;"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

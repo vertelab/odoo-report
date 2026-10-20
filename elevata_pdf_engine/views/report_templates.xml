@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Main Elevata document layout template -->
+    <template id="external_layout_elevata">
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+            }
+            .article.o_report_layout_background {
+                background-size: 100% auto !important;
+                background-position: center top !important;
+                background-repeat: repeat-y !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                min-height: 25cm;
+            }
+            .page {
+                min-height: 25cm;
+                position: relative;
+                box-sizing: border-box;
+            }
+            .article {
+                padding-bottom: 5cm;
+            }
+            @media print {
+                @page {
+                    size: A4;
+                    margin: 0;
+                }
+                * {
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                }
+                .o_report_layout_background {
+                    background-attachment: scroll !important;
+                    background-repeat: repeat-y !important;
+                }
+                .article {
+                    background-image: inherit !important;
+                    background-position: inherit !important;
+                    background-repeat: inherit !important;
+                    background-size: inherit !important;
+                }
+                .page {
+                    background-image: inherit !important;
+                    background-position: inherit !important;
+                    background-repeat: inherit !important;
+                    background-size: inherit !important;
+                    page-break-inside: auto;
+                }
+                .header, .footer {
+                    background-color: transparent !important;
+                }
+            }
+        </style>
+
+        <!-- Header: logo left, page numbers right -->
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="o_clean_header">
+                <div class="row">
+                    <div class="col-6">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                             alt="Logo" style="width: 150px;"/>
+                    </div>
+                    <div class="col-5 offset-1" name="company_address">
+                        <div class="row">
+                            <div class="col-12 text-end">
+                                <span t-if="o and o._name == 'account.move' and o.move_type == 'out_invoice'"
+                                      style="font-size: 12pt;">
+                                    <t t-esc="o.name"/> : sida <span class="page"/> av <span class="topage"/>
+                                </span>
+                                <span t-elif="o and o._name == 'sale.order'" style="font-size: 12pt;">
+                                    <t t-esc="o.name"/> : sida <span class="page"/> av <span class="topage"/>
+                                </span>
+                                <span t-elif="o and o._name == 'purchase.order'" style="font-size: 12pt;">
+                                    <t t-esc="o.name"/> : sida <span class="page"/> av <span class="topage"/>
+                                </span>
+                                <span t-else="" style="font-size: 12pt;">
+                                    <t t-esc="o and o.name or ''"/> : sida <span class="page"/> av <span class="topage"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article: document content with optional background image -->
+        <div t-attf-class="article o_report_layout_bold o_company_#{company.id}_layout {{ 'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom'] else '' }}"
+             t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else ('/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else '') }});
+                          background-position: center top;
+                          background-repeat: repeat-y;
+                          background-size: 100% auto;
+                          -webkit-print-color-adjust: exact;
+                          print-color-adjust: exact;
+                          min-height: 25cm;
+                          position: relative;
+                          padding-top: 20px;"
+             t-att-data-oe-model="o and o._name"
+             t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 25cm; z-index: -10;"></div>
+
+            <t t-call="web.address_layout"/>
+            <t t-out="0"/>
+
+            <div style="height: 5cm; opacity: 0.01; overflow: hidden; page-break-inside: avoid;">
+                <p style="color: transparent; font-size: 1px;">.</p>
+            </div>
+        </div>
+
+        <!-- Footer: address, contact, payment info -->
+        <div t-attf-class="footer o_clean_footer o_company_#{company.id}_layout">
+            <div class="row mt-2"
+                 style="border-top: 0.5px solid #999999; padding-top: 10px; font-weight: 300; color: #666666; line-height: 1.3;">
+                <div class="col-3 text-start">
+                    <div style="font-weight: 500; margin-bottom: 4px;">ADRESS</div>
+                    <div t-field="company.name"/>
+                    <div t-field="company.partner_id.street"/>
+                    <div>
+                        <span t-field="company.partner_id.zip"/>
+                        <span t-field="company.partner_id.city"/>
+                    </div>
+                </div>
+                <div class="col-4 text-start">
+                    <div style="font-weight: 500; margin-bottom: 4px;">KONTAKT</div>
+                    <div>Telefon: <span t-field="company.phone"/></div>
+                    <div>E-post: <span t-field="company.email"/></div>
+                    <div>Webbadress: <span t-field="company.website"/></div>
+                </div>
+                <div class="col-5 text-end">
+                    <div class="text-start" style="display: inline-block;">
+                        <div style="font-weight: 500; margin-bottom: 4px;">BETALNINGSINFORMATION</div>
+                        <div>Bankgiro: <span t-field="company.bankgiro"/></div>
+                        <div>Organisationsnr: <span t-field="company.partner_id.company_registry"/></div>
+                        <div>Momsregnr: <span t-field="company.vat"/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Inherit web.external_layout to use Elevata layout when selected -->
+    <template id="external_layout" inherit_id="web.external_layout" primary="True">
+        <xpath expr="." position="replace">
+            <t t-name="web.external_layout">
+                <t t-if="not o" t-set="o" t-value="doc"/>
+                <t t-if="not company">
+                    <t t-if="company_id">
+                        <t t-set="company" t-value="company_id"/>
+                    </t>
+                    <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                        <t t-set="company" t-value="o.company_id.sudo()"/>
+                    </t>
+                    <t t-else="else">
+                        <t t-set="company" t-value="res_company"/>
+                    </t>
+                </t>
+                <t t-if="company.external_report_layout_id.key == 'elevata_pdf_engine.external_layout_elevata'">
+                    <t t-call="elevata_pdf_engine.external_layout_elevata"><t t-out="0"/></t>
+                </t>
+                <t t-else="">
+                    <t t-call="web.external_layout_standard"><t t-out="0"/></t>
+                </t>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Sale order report tweaks -->
+    <template id="report_saleorder_document_inherit_elevata" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[hasclass('page')]" position="attributes">
+            <attribute name="class">page</attribute>
+        </xpath>
+        <xpath expr="//table[hasclass('o_main_table')]" position="attributes">
+            <attribute name="class">table table-sm o_main_table table-borderless</attribute>
+        </xpath>
+        <xpath expr="//div[@id='total']" position="attributes">
+            <attribute name="class">row</attribute>
+        </xpath>
+    </template>
+
+    <!-- Invoice report tweaks -->
+    <template id="report_invoice_document_inherit_elevata" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[hasclass('page')]" position="attributes">
+            <attribute name="class">page</attribute>
+        </xpath>
+        <xpath expr="//table[hasclass('o_main_table')]" position="attributes">
+            <attribute name="class">table table-sm o_main_table table-borderless</attribute>
+        </xpath>
+        <xpath expr="//div[@id='total']" position="attributes">
+            <attribute name="class">clearfix row</attribute>
+        </xpath>
+    </template>
+
+    <!-- Company report styles -->
+    <template id="styles_company_report" inherit_id="web.styles_company_report">
+        <xpath expr="//t[@t-foreach='company_ids']" position="inside">
+            <t t-if="layout == 'elevata_pdf_engine.external_layout_elevata'">
+                .o_company_<t t-out='company.id'/>_layout {
+                    font-family: <t t-out="font" />;
+
+                    &amp;.o_clean_footer {
+                        border-top: 3px solid <t t-out='secondary'/>;
+                        h4 {
+                            color: <t t-out='secondary'/>;
+                        }
+                        .pagenumber {
+                            border: 3px solid <t t-out='primary'/>;
+                        }
+                    }
+                    &amp;.o_report_layout_bold {
+                        h1, h2, h3 {
+                            color: <t t-out='primary'/>;
+                        }
+                        strong {
+                            color: <t t-out='secondary'/>;
+                        }
+                        table {
+                            thead {
+                                color: <t t-out='secondary'/>;
+                                tr th {
+                                    border-top: 3px solid <t t-out='secondary'/> !important;
+                                }
+                            }
+                            tbody {
+                                tr:last-child td {
+                                    border-bottom: 3px solid <t t-out='secondary'/>;
+                                }
+                            }
+                        }
+                        #total {
+                            strong {
+                                color: <t t-out='secondary'/>;
+                            }
+                        }
+                    }
+                }
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

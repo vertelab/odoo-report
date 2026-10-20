@@ -1,0 +1,186 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* elevata_pdf_engine
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20260317\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-18 13:13+0000\n"
+"PO-Revision-Date: 2026-10-18 13:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.styles_company_report
+msgid ""
+"!important;\n"
+"                                }\n"
+"                            }\n"
+"                            tbody {\n"
+"                                tr:last-child td {\n"
+"                                    border-bottom: 3px solid"
+msgstr "\"\"!important;\\n\"\"                                }\\n\"\"                            }\\n\"\"                            tbody {\\n\"\"                                tr:last-child td {\\n\"\"                                    border-bottom: 3px solid"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.styles_company_report
+msgid ".o_company_"
+msgstr ".o_company_"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.external_layout_elevata
+msgid ": sida <span class=\"page\"/> av <span class=\"topage\"/>"
+msgstr ": sida <span class=\"page\"/> av <span class=\"topage\"/>"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.styles_company_report
+msgid ""
+";\n"
+"\n"
+"                    &amp;.o_clean_footer {\n"
+"                        border-top: 3px solid"
+msgstr "\"\";\\n\"\"\\n\"\"                    &amp;.o_clean_footer {\\n\"\"                        border-top: 3px solid"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.styles_company_report
+msgid ""
+";\n"
+"                                tr th {\n"
+"                                    border-top: 3px solid"
+msgstr "\"\";\\n\"\"                                tr th {\\n\"\"                                    border-top: 3px solid"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.styles_company_report
+msgid ""
+";\n"
+"                                }\n"
+"                            }\n"
+"                        }\n"
+"                        #total {\n"
+"                            strong {\n"
+"                                color:"
+msgstr "\"\";\\n\"\"                                }\\n\"\"                            }\\n\"\"                        }\\n\"\"                        #total {\\n\"\"                            strong {\\n\"\"                                color:"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.styles_company_report
+msgid ""
+";\n"
+"                        h4 {\n"
+"                            color:"
+msgstr "\"\";\\n\"\"                        h4 {\\n\"\"                            color:"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.styles_company_report
+msgid ""
+";\n"
+"                        }\n"
+"                        .pagenumber {\n"
+"                            border: 3px solid"
+msgstr "\"\";\\n\"\"                        }\\n\"\"                        .pagenumber {\\n\"\"                            border: 3px solid"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.styles_company_report
+msgid ""
+";\n"
+"                        }\n"
+"                        strong {\n"
+"                            color:"
+msgstr "\"\";\\n\"\"                        }\\n\"\"                        strong {\\n\"\"                            color:"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.styles_company_report
+msgid ""
+";\n"
+"                        }\n"
+"                        table {\n"
+"                            thead {\n"
+"                                color:"
+msgstr "\"\";\\n\"\"                        }\\n\"\"                        table {\\n\"\"                            thead {\\n\"\"                                color:"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.styles_company_report
+msgid ""
+";\n"
+"                        }\n"
+"                    }\n"
+"                    &amp;.o_report_layout_bold {\n"
+"                        h1, h2, h3 {\n"
+"                            color:"
+msgstr "\"\";\\n\"\"                        }\\n\"\"                    }\\n\"\"                    &amp;.o_report_layout_bold {\\n\"\"                        h1, h2, h3 {\\n\"\"                            color:"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.external_layout_elevata
+msgid "ADRESS"
+msgstr "ADRESS"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.external_layout_elevata
+msgid "BETALNINGSINFORMATION"
+msgstr "BETALNINGSINFORMATION"
+
+#. module: elevata_pdf_engine
+#: model:ir.model.fields,field_description:elevata_pdf_engine.field_base_document_layout__bankgiro
+#: model:ir.model.fields,field_description:elevata_pdf_engine.field_res_company__bankgiro
+msgid "Bankgiro"
+msgstr "Bankgiro"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.external_layout_elevata
+msgid "Bankgiro:"
+msgstr "Bankgiro:"
+
+#. module: elevata_pdf_engine
+#: model:ir.model,name:elevata_pdf_engine.model_res_company
+msgid "Companies"
+msgstr "Bolag"
+
+#. module: elevata_pdf_engine
+#: model:ir.model,name:elevata_pdf_engine.model_base_document_layout
+msgid "Company Document Layout"
+msgstr "Företagets dokumentlayout"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.external_layout_elevata
+msgid "E-post:"
+msgstr "E-post:"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.external_layout_elevata
+msgid "KONTAKT"
+msgstr "KONTAKT"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.external_layout_elevata
+msgid "Logo"
+msgstr "Logo"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.external_layout_elevata
+msgid "Momsregnr:"
+msgstr "Momsregnr:"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.external_layout_elevata
+msgid "Organisationsnr:"
+msgstr "Organisationsnr:"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.external_layout_elevata
+msgid "Telefon:"
+msgstr "Telefon:"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.external_layout_elevata
+msgid "Webbadress:"
+msgstr "Webbadress:"
+
+#. module: elevata_pdf_engine
+#: model_terms:ir.ui.view,arch_db:elevata_pdf_engine.styles_company_report
+msgid ""
+"_layout {\n"
+"                    font-family:"
+msgstr "\"\"_layout {\\n\"\"                    font-family:"

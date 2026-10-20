@@ -1,0 +1,117 @@
+// Elevata PDF Engine — report layout styles
+// Applied via web.report_assets_pdf (Odoo 17 compatible)
+
+.o_clean_footer,
+.o_clean_header,
+.o_report_layout_bold {
+    padding: 0;
+    margin: 0;
+    color: #000;
+}
+
+.o_clean_header {
+    padding-bottom: 20px;
+
+    img {
+        max-height: 90px;
+        max-width: 300px;
+    }
+}
+
+.o_clean_footer {
+    margin: 0 3px;
+    margin-top: 200px;
+    border-top: 3px solid var(--secondary);
+
+    h4 {
+        color: var(--secondary);
+        font-weight: bolder;
+    }
+
+    .pagenumber {
+        border: 3px solid var(--primary);
+        color: white;
+        padding: 4px 8px;
+        text-align: center;
+    }
+}
+
+.o_report_layout_bold {
+    page-break-inside: auto;
+
+    .page {
+        page-break-inside: avoid;
+        page-break-before: avoid;
+    }
+
+    h1, h2, h3 {
+        color: var(--primary);
+        font-weight: bolder;
+        margin: 0.8rem 0;
+    }
+
+    strong {
+        color: var(--secondary);
+    }
+
+    table {
+        width: 100%;
+        page-break-inside: avoid;
+
+        &.o_main_table {
+            margin-bottom: 0;
+        }
+
+        thead {
+            color: var(--secondary);
+
+            tr th {
+                border-top: 3px solid var(--secondary) !important;
+                text-transform: uppercase;
+                border-bottom: none;
+                padding: 8px 4px;
+            }
+        }
+
+        tbody {
+            color: #000;
+
+            tr:first-child td {
+                border-top: none;
+            }
+
+            tr:last-child td {
+                border-bottom: 3px solid var(--secondary);
+            }
+
+            tr {
+                page-break-inside: avoid;
+
+                td {
+                    padding: 8px 4px;
+                    border-top: none;
+                }
+            }
+        }
+    }
+
+    #total {
+        page-break-inside: avoid;
+
+        strong {
+            color: var(--secondary);
+        }
+
+        table {
+            page-break-inside: avoid;
+
+            tr:first-child td {
+                border-top: none !important;
+            }
+
+            tr:last-child td {
+                border-top: 1px solid #dee2e6 !important;
+            }
+        }
+    }
+}
