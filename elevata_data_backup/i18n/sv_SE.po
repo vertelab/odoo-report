@@ -1,0 +1,107 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* elevata_data_backup
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20260317\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-18 13:12+0000\n"
+"PO-Revision-Date: 2026-10-18 13:12+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__model_count
+msgid "Antal modeller"
+msgstr "Antal modeller"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__record_count
+msgid "Antal poster"
+msgstr "Antal poster"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__note
+msgid "Anteckning"
+msgstr "Anteckning"
+
+#. module: elevata_data_backup
+#: model:ir.model,name:elevata_data_backup.model_elevata_data_backup
+msgid "Backup av affärsdata"
+msgstr "Backup av affärsdata"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__backup_date
+msgid "Backupdatum"
+msgstr "Backupdatum"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__attachment_id
+msgid "Backupfil"
+msgstr "Backupfil"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: elevata_data_backup
+#: model:ir.actions.act_window,name:elevata_data_backup.action_elevata_data_backup
+#: model:ir.ui.menu,name:elevata_data_backup.menu_elevata_data_backup
+msgid "Databackup"
+msgstr "Databackup"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: elevata_data_backup
+#: model:ir.actions.server,name:elevata_data_backup.ir_cron_elevata_data_backup_ir_actions_server
+msgid "Elevata: Veckovis backup av affärsdata"
+msgstr "Elevata: Veckovis backup av affärsdata"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__id
+msgid "ID"
+msgstr "ID"
+
+#. module: elevata_data_backup
+#: model_terms:ir.ui.view,arch_db:elevata_data_backup.elevata_data_backup_form
+msgid "Ladda ner"
+msgstr "Ladda ner"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__name
+msgid "Namn"
+msgstr "Namn"
+
+#. module: elevata_data_backup
+#: model_terms:ir.ui.view,arch_db:elevata_data_backup.elevata_data_backup_form
+msgid "Skapa backup nu"
+msgstr "Skapa backup nu"
+
+#. module: elevata_data_backup
+#: model:ir.model.fields,field_description:elevata_data_backup.field_elevata_data_backup__file_size
+msgid "Storlek (byte)"
+msgstr "Storlek (byte)"

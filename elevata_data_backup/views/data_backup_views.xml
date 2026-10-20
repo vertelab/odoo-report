@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="elevata_data_backup_list" model="ir.ui.view">
+        <field name="name">elevata.data.backup.list</field>
+        <field name="model">elevata.data.backup</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="backup_date"/>
+                <field name="record_count"/>
+                <field name="model_count"/>
+                <field name="file_size"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="elevata_data_backup_form" model="ir.ui.view">
+        <field name="name">elevata.data.backup.form</field>
+        <field name="model">elevata.data.backup</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_run_backup" type="object"
+                            string="Create Backup Now" class="btn-primary"/>
+                    <button name="action_download" type="object"
+                            string="Download"
+                            invisible="not attachment_id"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="backup_date"/>
+                        <field name="attachment_id" readonly="1"/>
+                        <field name="file_size" readonly="1"/>
+                        <field name="record_count" readonly="1"/>
+                        <field name="model_count" readonly="1"/>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_elevata_data_backup" model="ir.actions.act_window">
+        <field name="name">Data Backup</field>
+        <field name="res_model">elevata.data.backup</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="menu_elevata_data_backup"
+            model="ir.ui.menu">
+        <field name="name">Data Backup</field>
+        <field name="sequence">80</field>
+        <field name="action" ref="action_elevata_data_backup"/>
+        <field name="parent_id" ref="base.menu_custom"/>
+    </record>
+
+</odoo>
