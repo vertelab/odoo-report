@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="elevata_googlemap.MapView">
+        <div t-att-class="props.className" t-ref="root">
+            <Layout display="props.display" className="model.useSampleModel ? 'o_view_sample_data' : ''">
+                <t t-set-slot="control-panel-additional-actions">
+                    <CogMenu/>
+                </t>
+                <t t-set-slot="layout-buttons">
+                    <t t-call="elevata_googlemap.MapView.Buttons"/>
+                </t>
+                <t t-set-slot="layout-actions">
+                    <SearchBar t-if="searchBarToggler.state.showSearchBar"/>
+                </t>
+                <t t-set-slot="control-panel-navigation-additional">
+                    <t t-component="searchBarToggler.component" t-props="searchBarToggler.props"/>
+                </t>
+                <t t-component="props.Renderer" t-props="rendererProps" />
+            </Layout>
+        </div>
+    </t>
+
+    <t t-name="elevata_googlemap.MapView.Buttons">
+        <div class="o_cp_buttons">
+            <!-- Add your button content here -->
+        </div>
+    </t>
+
+</templates>

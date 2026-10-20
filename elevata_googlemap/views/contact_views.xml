@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_view_googlemap" model="ir.ui.view">
+        <field name="name">res.partner.view.googlemap</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <googlemap res_partner="id"/>
+        </field>
+    </record>
+
+    <record id="res_partner_action_contacts_view_googlemap" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">googlemap</field>
+        <field name="view_id" ref="res_partner_view_googlemap"/>
+        <field name="act_window_id" ref="contacts.action_contacts"/>
+    </record>
+</odoo>

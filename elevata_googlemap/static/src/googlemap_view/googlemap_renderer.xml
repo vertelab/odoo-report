@@ -1,0 +1,127 @@
+<?xml version ="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="elevata_googlemap.MapRenderer">
+       
+        <div class="o-googlemap-renderer row g-0" t-att-class="{ 'd-none': expendedPartnerList }">
+            <div class="h-100" t-att-class="props.model.metaData.hidePartnerList ? 'col' : 'col col-md-10'">
+                <div class="o-googlemap-renderer--container h-100" t-ref="mapContainer"/>
+            </div>            
+            <t t-if="!env.isSmall and !props.model.metaData.hidePartnerList">
+                <t t-call="elevata_googlemap.MapRenderer.PartnerListContainer"/>
+            </t>
+        </div>
+
+         <t t-if="env.isSmall and !props.model.metaData.hidePartnerList">
+            <div class="row g-0 o-sm-partner-list-container" t-att-class="{ 'h-100': expendedPartnerList }">
+                <t t-call="elevata_googlemap.MapRenderer.PartnerListContainer"/>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="elevata_googlemap.MapRenderer.SearchInput">
+        <input id="pac-input" class="o-googlemap-controls" type="text" placeholder="Search Box" />
+    </t>
+
+    <t t-name="elevata_googlemap.MapRenderer.PartnerListContainer">
+        <div class="o-googlemap-renderer--partner-list-container col-12 col-md-2 bg-view border-start cursor-default h-100">
+            
+            <t t-if="!props.model.metaData.hideTitle">
+                <header class="o-googlemap-renderer--partner-list-header o_pin_list_header text-uppercase px-0 py-md-2 d-flex align-items-baseline" 
+                    t-on-click="togglePartnerList">
+                    <i class="fa fa-list me-2 text-primary"/>
+                    <span class="fs-6 fw-bold text-truncate" t-out="props.model.metaData.panelTitle"/>
+                    <i t-if="env.isSmall" class="fa float-end ms-auto" t-att-class="{
+                        'fa-caret-down': expendedPartnerList,
+                        'fa-caret-left': !expendedPartnerList
+                    }"/>
+                </header>
+            </t>
+
+            <t t-if="canDisplayPartnerList and props.model.data.isGrouped">
+                <t t-foreach="props.model.data.recordGroups" t-as="groupId" t-key="groupId">
+                    <div class="o-googlemap-renderer--partner-list-group mb-1">
+                        <t t-set="group" t-value="props.model.data.recordGroups[groupId]"/>
+                        <div class="o-googlemap-renderer--partner-list-group-header d-flex align-items-baseline"
+                             t-on-click="() => this.toggleGroup(groupId)">
+                            <i t-attf-class="fa fa-caret-{{ state.closedGroupIds.includes(groupId) ? 'right' : 'down' }}"/>
+                            
+                            <span class="ms-1" t-att-style="'color: #ea4236'">
+                                <t t-call="elevata_googlemap.pinSVG"></t>
+                            </span>
+
+                            <t t-if="group.name" t-esc="group.name"/>
+                            <t t-else="">Undefined</t>
+                        </div>
+                        <t t-if="!state.closedGroupIds.includes(groupId)">
+                            <t t-call="elevata_googlemap.MapRenderer.PartnerList">
+                                <t t-set="records" t-value="group.records"/>
+                            </t>
+                        </t>
+                    </div>
+                </t>
+            </t>
+
+            <t t-elif="canDisplayPartnerList">
+                <t t-call="elevata_googlemap.MapRenderer.PartnerList">
+                    <t t-set="records" t-value="props.model.data.records"/>
+                </t>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="elevata_googlemap.MapRenderer.PartnerList">
+        <t t-tag="props.model.metaData.numbering ? 'ol' : 'ul'"
+           t-att-class="{'o-googlemap-renderer--pin-located': !props.model.metaData.numbering}"
+           class="o-googlemap-renderer--partner-list-details ps-0 pb-0">
+            
+            <t t-foreach="records" t-as="record" t-key="record.id">
+                
+                <t t-set="latitude" t-value="record.partner and record.partner.partner_latitude"/>
+                <t t-set="longitude" t-value="record.partner and record.partner.partner_longitude"/>
+                
+                <li t-if="latitude and longitude" t-on-click.prevent="(ev) => this.centerAndOpenPartner(ev, record)" 
+                    class="text-truncate cursor-pointer o-googlemap-renderer--pin-located">
+                    <t t-esc="record.display_name"/>
+                </li>
+            </t>
+        </t>
+    </t>
+
+    <t t-name="elevata_googlemap.pinSVG">
+        <svg width="12" height="12" viewBox="0 0 100 100">
+            <path fill="currentColor" d="M50 0C29.86 0 13.23 15.87 13.23 35.49c0 9.27 3.94 17.71 10.35 23.92L50 100l26.42-40.59c6.41-6.21 10.35-14.65 10.35-23.92C86.77 15.87 70.14 0 50 0zm0 48.49c-7.48 0-13.55-6.07-13.55-13.55S42.52 21.39 50 21.39s13.55 6.07 13.55 13.55S57.48 48.49 50 48.49z"/>
+        </svg>
+    </t>
+
+    <t t-name="elevata_googlemap.markerPopup">
+        <div>
+            <table class="o-googlemap-renderer--popup-table align-top">
+                <tbody>
+                    <tr t-foreach="fields" t-as="field" t-key="field.id">
+                        <td class="o-googlemap-renderer--popup-table-content-name fw-bold text-nowrap align-baseline">
+                            <t t-esc="field.string"/>
+                        </td>
+                        <td class="o-googlemap-renderer--popup-table-space"></td>
+                        <td class="o-googlemap-renderer--popup-table-content-value align-baseline">
+                            <t t-if="field.recordId">
+                                <a href="#" class="contact-link text-primary" t-att-data-record-id="field.recordId">
+                                    <t t-esc="field.value"/>
+                                </a>
+                            </t>
+                            <t t-else="">
+                                <t t-esc="field.value"/>
+                            </t>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="o-googlemap-renderer--popup-buttons d-flex align-item-end justify-content-start mt8">
+                <a class="btn btn-primary" role="button" t-att-href="url" target="_blank">
+                    Navigate to
+                </a>
+            </div>
+        </div>
+    </t>
+
+</templates>

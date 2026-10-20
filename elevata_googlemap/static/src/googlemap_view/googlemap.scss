@@ -1,0 +1,40 @@
+.o-map-renderer {
+    .contact-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        padding: 4px 0;
+
+        .contact-name {
+            margin-right: 12px;
+            font-weight: normal;
+        }
+
+        .contact-open {
+            min-width: 60px;
+        }
+    }
+}
+
+.o-googlemap-renderer {
+    .o-googlemap-renderer--popup-table {
+        .contact-link {
+            text-decoration: none;
+            color: #00529b;  // Elevata blue
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .contact-open {
+            min-width: 60px;
+        }
+
+        td {
+            padding: 4px 8px;
+            vertical-align: middle;
+        }
+    }
+}
