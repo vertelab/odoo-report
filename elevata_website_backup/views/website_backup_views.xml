@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="elevata_website_backup_list" model="ir.ui.view">
+        <field name="name">elevata.website.backup.list</field>
+        <field name="model">elevata.website.backup</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="website_id"/>
+                <field name="backup_date"/>
+                <field name="page_count"/>
+                <field name="view_count"/>
+                <field name="image_count"/>
+                <field name="file_size"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="elevata_website_backup_form" model="ir.ui.view">
+        <field name="name">elevata.website.backup.form</field>
+        <field name="model">elevata.website.backup</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_run_backup" type="object"
+                            string="Create Backup Now" class="btn-primary"/>
+                    <button name="action_download" type="object"
+                            string="Download"
+                            invisible="not attachment_id"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="website_id"/>
+                        <field name="backup_date"/>
+                        <field name="attachment_id" readonly="1"/>
+                        <field name="file_size" readonly="1"/>
+                        <field name="page_count" readonly="1"/>
+                        <field name="view_count" readonly="1"/>
+                        <field name="image_count" readonly="1"/>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_elevata_website_backup" model="ir.actions.act_window">
+        <field name="name">Website Backup</field>
+        <field name="res_model">elevata.website.backup</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_elevata_website_backup_now" model="ir.actions.server">
+        <field name="name">Create website backup now</field>
+        <field name="model_id" ref="model_elevata_website_backup"/>
+        <field name="state">code</field>
+        <field name="code">model._create_backup()</field>
+    </record>
+
+    <menuitem id="menu_elevata_website_backup"
+              name="Website Backup"
+              parent="website.menu_website_configuration"
+              action="action_elevata_website_backup"
+              sequence="99"/>
+
+</odoo>
