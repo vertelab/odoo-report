@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_calendar_event_type_user,calendar.event.type.user,calendar.model_calendar_event_type,elevata_base.group_user,1,0,0,0
+access_calendar_event_type_manager,calendar.event.type.manager,calendar.model_calendar_event_type,elevata_base.group_manager,1,1,1,1
+access_elevata_access_profile_admin,elevata.access.profile.admin,model_elevata_access_profile,base.group_system,1,1,1,1
+access_elevata_access_profile_wizard_admin,elevata.access.profile.wizard.admin,model_elevata_access_profile_wizard,base.group_system,1,1,1,1
+access_elevata_access_profile_save_wizard_admin,elevata.access.profile.save.wizard.admin,model_elevata_access_profile_save_wizard,base.group_system,1,1,1,1

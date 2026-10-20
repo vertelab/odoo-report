@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Ladda rättighetsprofil -->
+    <record id="view_access_profile_load_wizard" model="ir.ui.view">
+        <field name="name">elevata.access.profile.wizard.form</field>
+        <field name="model">elevata.access.profile.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Ladda rättighetsprofil">
+                <group>
+                    <field name="user_id" readonly="1"/>
+                    <field name="profile_id"/>
+                    <field name="replace"/>
+                </group>
+                <footer>
+                    <button string="Ladda rättigheter" name="action_apply" type="object" class="oe_highlight"/>
+                    <button string="Avbryt" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Spara som rättighetsprofil -->
+    <record id="view_access_profile_save_wizard" model="ir.ui.view">
+        <field name="name">elevata.access.profile.save.wizard.form</field>
+        <field name="model">elevata.access.profile.save.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Spara som rättighetsprofil">
+                <group>
+                    <field name="user_id" readonly="1"/>
+                    <field name="name" placeholder="T.ex. Hisstekniker"/>
+                    <field name="note" placeholder="Kort beskrivning av profilen..."/>
+                </group>
+                <separator string="Permissions to save"/>
+                <field name="group_ids" widget="many2many_tags" readonly="1"/>
+                <footer>
+                    <button string="Spara profil" name="action_save" type="object" class="oe_highlight"/>
+                    <button string="Avbryt" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

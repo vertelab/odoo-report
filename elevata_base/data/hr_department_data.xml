@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ===== AVDELNINGAR (ekonomiska / affärsområden) ===== -->
+
+        <record id="dept_service" model="hr.department">
+            <field name="name">Service</field>
+        </record>
+
+        <record id="dept_modernisering" model="hr.department">
+            <field name="name">Modernisering</field>
+        </record>
+
+        <record id="dept_nyhiss" model="hr.department">
+            <field name="name">Nyhiss</field>
+        </record>
+
+        <record id="dept_ekonomi" model="hr.department">
+            <field name="name">Ekonomi</field>
+        </record>
+
+        <record id="dept_administration" model="hr.department">
+            <field name="name">Administration</field>
+        </record>
+
+        <record id="dept_management" model="hr.department">
+            <field name="name">Ledning</field>
+        </record>
+
+        <record id="dept_technicians" model="hr.department">
+            <field name="name">Tekniker</field>
+        </record>
+
+        <record id="dept_finance" model="hr.department">
+            <field name="name">Ekonomi &amp; Finans</field>
+        </record>
+
+        <record id="dept_sales" model="hr.department">
+            <field name="name">Försäljning</field>
+        </record>
+
+        <record id="dept_customer_service" model="hr.department">
+            <field name="name">Kundtjänst</field>
+        </record>
+
+    </data>
+</odoo>

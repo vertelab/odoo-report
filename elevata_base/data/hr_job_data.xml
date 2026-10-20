@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ===== JOB POSITIONS ===== -->
+
+        <record id="job_ceo" model="hr.job">
+            <field name="name">CEO</field>
+            <field name="department_id" ref="dept_management"/>
+        </record>
+
+        <record id="job_project_manager" model="hr.job">
+            <field name="name">Project Manager</field>
+            <field name="department_id" ref="dept_management"/>
+        </record>
+
+        <record id="job_elevator_technician" model="hr.job">
+            <field name="name">Elevator Technician</field>
+            <field name="department_id" ref="dept_technicians"/>
+        </record>
+
+        <record id="job_service_technician" model="hr.job">
+            <field name="name">Service Technician</field>
+            <field name="department_id" ref="dept_technicians"/>
+        </record>
+
+        <record id="job_installation_technician" model="hr.job">
+            <field name="name">Installation Technician</field>
+            <field name="department_id" ref="dept_technicians"/>
+        </record>
+
+        <record id="job_finance_manager" model="hr.job">
+            <field name="name">Finance Manager</field>
+            <field name="department_id" ref="dept_finance"/>
+        </record>
+
+        <record id="job_administrator" model="hr.job">
+            <field name="name">Administrator</field>
+            <field name="department_id" ref="dept_administration"/>
+        </record>
+
+        <record id="job_sales_representative" model="hr.job">
+            <field name="name">Sales Representative</field>
+            <field name="department_id" ref="dept_sales"/>
+        </record>
+
+        <record id="job_customer_service_agent" model="hr.job">
+            <field name="name">Customer Service Agent</field>
+            <field name="department_id" ref="dept_customer_service"/>
+        </record>
+
+    </data>
+</odoo>

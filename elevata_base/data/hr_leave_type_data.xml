@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ===== LEAVE TYPES ===== -->
+
+        <record id="leave_vacation" model="hr.leave.type">
+            <field name="name">Vacation</field>
+            <field name="request_unit">day</field>
+            <field name="leave_validation_type">hr</field>
+            <field name="requires_allocation">yes</field>
+            <field name="time_type">leave</field>
+        </record>
+
+        <record id="leave_sickness" model="hr.leave.type">
+            <field name="name">Sickness</field>
+            <field name="request_unit">day</field>
+            <field name="leave_validation_type">hr</field>
+            <field name="requires_allocation">no</field>
+            <field name="time_type">leave</field>
+        </record>
+
+        <record id="leave_child_care" model="hr.leave.type">
+            <field name="name">Child Care (VAB)</field>
+            <field name="request_unit">day</field>
+            <field name="leave_validation_type">hr</field>
+            <field name="requires_allocation">no</field>
+            <field name="time_type">leave</field>
+        </record>
+
+        <record id="leave_comp_time" model="hr.leave.type">
+            <field name="name">Compensatory Time Off</field>
+            <field name="request_unit">day</field>
+            <field name="leave_validation_type">manager</field>
+            <field name="requires_allocation">no</field>
+            <field name="time_type">leave</field>
+        </record>
+
+        <record id="leave_bridge_days" model="hr.leave.type">
+            <field name="name">Bridge Days</field>
+            <field name="request_unit">day</field>
+            <field name="leave_validation_type">manager</field>
+            <field name="requires_allocation">no</field>
+            <field name="time_type">leave</field>
+        </record>
+
+        <record id="leave_business_trip" model="hr.leave.type">
+            <field name="name">Business Trip</field>
+            <field name="request_unit">day</field>
+            <field name="leave_validation_type">manager</field>
+            <field name="requires_allocation">no</field>
+            <field name="time_type">other</field>
+        </record>
+
+    </data>
+</odoo>

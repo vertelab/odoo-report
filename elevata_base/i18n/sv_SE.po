@@ -1,0 +1,490 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* elevata_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20260317\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-18 13:12+0000\n"
+"PO-Revision-Date: 2026-10-18 13:12+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: elevata_base
+#: model_terms:hr.job,job_details:elevata_base.job_administrator
+#: model_terms:hr.job,job_details:elevata_base.job_ceo
+#: model_terms:hr.job,job_details:elevata_base.job_customer_service_agent
+#: model_terms:hr.job,job_details:elevata_base.job_elevator_technician
+#: model_terms:hr.job,job_details:elevata_base.job_finance_manager
+#: model_terms:hr.job,job_details:elevata_base.job_installation_technician
+#: model_terms:hr.job,job_details:elevata_base.job_project_manager
+#: model_terms:hr.job,job_details:elevata_base.job_sales_representative
+#: model_terms:hr.job,job_details:elevata_base.job_service_technician
+msgid "1 Onsite Interview"
+msgstr "1 intervju på plats"
+
+#. module: elevata_base
+#: model_terms:hr.job,job_details:elevata_base.job_administrator
+#: model_terms:hr.job,job_details:elevata_base.job_ceo
+#: model_terms:hr.job,job_details:elevata_base.job_customer_service_agent
+#: model_terms:hr.job,job_details:elevata_base.job_elevator_technician
+#: model_terms:hr.job,job_details:elevata_base.job_finance_manager
+#: model_terms:hr.job,job_details:elevata_base.job_installation_technician
+#: model_terms:hr.job,job_details:elevata_base.job_project_manager
+#: model_terms:hr.job,job_details:elevata_base.job_sales_representative
+#: model_terms:hr.job,job_details:elevata_base.job_service_technician
+msgid "1 Phone Call"
+msgstr "1 telefonsamtal"
+
+#. module: elevata_base
+#: model_terms:hr.job,job_details:elevata_base.job_administrator
+#: model_terms:hr.job,job_details:elevata_base.job_ceo
+#: model_terms:hr.job,job_details:elevata_base.job_customer_service_agent
+#: model_terms:hr.job,job_details:elevata_base.job_elevator_technician
+#: model_terms:hr.job,job_details:elevata_base.job_finance_manager
+#: model_terms:hr.job,job_details:elevata_base.job_installation_technician
+#: model_terms:hr.job,job_details:elevata_base.job_project_manager
+#: model_terms:hr.job,job_details:elevata_base.job_sales_representative
+#: model_terms:hr.job,job_details:elevata_base.job_service_technician
+msgid "2 open days"
+msgstr "2 dagar kvar"
+
+#. module: elevata_base
+#: model_terms:hr.job,job_details:elevata_base.job_administrator
+#: model_terms:hr.job,job_details:elevata_base.job_ceo
+#: model_terms:hr.job,job_details:elevata_base.job_customer_service_agent
+#: model_terms:hr.job,job_details:elevata_base.job_elevator_technician
+#: model_terms:hr.job,job_details:elevata_base.job_finance_manager
+#: model_terms:hr.job,job_details:elevata_base.job_installation_technician
+#: model_terms:hr.job,job_details:elevata_base.job_project_manager
+#: model_terms:hr.job,job_details:elevata_base.job_sales_representative
+#: model_terms:hr.job,job_details:elevata_base.job_service_technician
+msgid "4 Days after Interview"
+msgstr "4 dagar efter intervju"
+
+#. module: elevata_base
+#: model_terms:hr.job,job_details:elevata_base.job_administrator
+#: model_terms:hr.job,job_details:elevata_base.job_ceo
+#: model_terms:hr.job,job_details:elevata_base.job_customer_service_agent
+#: model_terms:hr.job,job_details:elevata_base.job_elevator_technician
+#: model_terms:hr.job,job_details:elevata_base.job_finance_manager
+#: model_terms:hr.job,job_details:elevata_base.job_installation_technician
+#: model_terms:hr.job,job_details:elevata_base.job_project_manager
+#: model_terms:hr.job,job_details:elevata_base.job_sales_representative
+#: model_terms:hr.job,job_details:elevata_base.job_service_technician
+msgid "<span class=\"text-muted small\">Days to get an Offer</span>"
+msgstr "<span class=\"text-muted small\">Dagar till offert</span>"
+
+#. module: elevata_base
+#: model_terms:hr.job,job_details:elevata_base.job_administrator
+#: model_terms:hr.job,job_details:elevata_base.job_ceo
+#: model_terms:hr.job,job_details:elevata_base.job_customer_service_agent
+#: model_terms:hr.job,job_details:elevata_base.job_elevator_technician
+#: model_terms:hr.job,job_details:elevata_base.job_finance_manager
+#: model_terms:hr.job,job_details:elevata_base.job_installation_technician
+#: model_terms:hr.job,job_details:elevata_base.job_project_manager
+#: model_terms:hr.job,job_details:elevata_base.job_sales_representative
+#: model_terms:hr.job,job_details:elevata_base.job_service_technician
+msgid "<span class=\"text-muted small\">Process</span>"
+msgstr "<span class=\"text-muted small\">Process</span>"
+
+#. module: elevata_base
+#: model_terms:hr.job,job_details:elevata_base.job_administrator
+#: model_terms:hr.job,job_details:elevata_base.job_ceo
+#: model_terms:hr.job,job_details:elevata_base.job_customer_service_agent
+#: model_terms:hr.job,job_details:elevata_base.job_elevator_technician
+#: model_terms:hr.job,job_details:elevata_base.job_finance_manager
+#: model_terms:hr.job,job_details:elevata_base.job_installation_technician
+#: model_terms:hr.job,job_details:elevata_base.job_project_manager
+#: model_terms:hr.job,job_details:elevata_base.job_sales_representative
+#: model_terms:hr.job,job_details:elevata_base.job_service_technician
+msgid "<span class=\"text-muted small\">Time to Answer</span>"
+msgstr "<span class=\"text-muted small\">Svarstid</span>"
+
+#. module: elevata_base
+#: model:hr.department,name:elevata_base.dept_administration
+msgid "Administration"
+msgstr "Administration"
+
+#. module: elevata_base
+#: model:hr.job,name:elevata_base.job_administrator
+#: model:res.groups,name:elevata_base.group_admin
+msgid "Administrator"
+msgstr "Administratör"
+
+#. module: elevata_base
+#: model:res.groups,comment:elevata_base.group_manager
+msgid "All functions + reports + pricelists"
+msgstr "Alla funktioner + rapporter + prislistor"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_hr_employee__employee_number
+msgid "Anställningsnummer"
+msgstr "Anställningsnummer"
+
+#. module: elevata_base
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_access_profile_load_wizard
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_access_profile_save_wizard
+msgid "Avbryt"
+msgstr "Avbryt"
+
+#. module: elevata_base
+#: model:res.groups,comment:elevata_base.group_user
+msgid "Base — sees own work, limited access"
+msgstr "Bas — ser sitt eget arbete, begränsad åtkomst"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile__note
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_save_wizard__note
+msgid "Beskrivning"
+msgstr "Beskrivning"
+
+#. module: elevata_base
+#: model:hr.leave.type,name:elevata_base.leave_bridge_days
+msgid "Bridge Days"
+msgstr "Klämdagar"
+
+#. module: elevata_base
+#: model:hr.leave.type,name:elevata_base.leave_business_trip
+msgid "Business Trip"
+msgstr "Tjänsteuppdrag"
+
+#. module: elevata_base
+#: model:hr.job,name:elevata_base.job_ceo
+msgid "CEO"
+msgstr "VD"
+
+#. module: elevata_base
+#: model:hr.leave.type,name:elevata_base.leave_child_care
+msgid "Child Care (VAB)"
+msgstr "VAB"
+
+#. module: elevata_base
+#: model:hr.leave.type,name:elevata_base.leave_comp_time
+msgid "Compensatory Time Off"
+msgstr "Kompledighet"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile__create_uid
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_save_wizard__create_uid
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_wizard__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile__create_date
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_save_wizard__create_date
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_wizard__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: elevata_base
+#: model:hr.job,name:elevata_base.job_customer_service_agent
+msgid "Customer Service Agent"
+msgstr "Kundservicemedarbetare"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile__display_name
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_save_wizard__display_name
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_wizard__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: elevata_base
+#: model:hr.department,name:elevata_base.dept_ekonomi
+msgid "Ekonomi"
+msgstr "Ekonomi"
+
+#. module: elevata_base
+#: model:hr.department,name:elevata_base.dept_finance
+msgid "Ekonomi & Finans"
+msgstr "Ekonomi"
+
+#. module: elevata_base
+#: model:ir.module.category,name:elevata_base.module_category_elevata
+msgid "Elevata"
+msgstr "Elevata"
+
+#. module: elevata_base
+#: model:ir.module.category,description:elevata_base.module_category_elevata
+msgid "Elevata Hiss AB — permission groups"
+msgstr "Elevata Hiss AB — behörighetsgrupper"
+
+#. module: elevata_base
+#: model:hr.job,name:elevata_base.job_elevator_technician
+msgid "Elevator Technician"
+msgstr "Hisstekniker"
+
+#. module: elevata_base
+#: model:ir.model,name:elevata_base.model_hr_employee
+msgid "Employee"
+msgstr "Anställd"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_wizard__replace
+msgid "Ersätt befintliga rättigheter"
+msgstr "Ersätt befintliga rättigheter"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_hr_employee__fsm_person_id
+msgid "FSM Worker"
+msgstr "Fältservicetekniker"
+
+#. module: elevata_base
+#: model:res.groups,comment:elevata_base.group_technician
+msgid "FSM orders, timesheets, checklists — NOT offers/contracts/pricelists"
+msgstr "FSM-order, tidrapporter, checklistor — INTE offerter/avtal/prislistor"
+
+#. module: elevata_base
+#: model:hr.job,name:elevata_base.job_finance_manager
+msgid "Finance Manager"
+msgstr "Ekonomiansvarig"
+
+#. module: elevata_base
+#: model:res.groups,comment:elevata_base.group_admin
+msgid "Full access — configuration, security, everything"
+msgstr "Full åtkomst — konfiguration, säkerhet, allt"
+
+#. module: elevata_base
+#: model:hr.department,name:elevata_base.dept_sales
+msgid "Försäljning"
+msgstr "Försäljning"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile__group_ids
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_access_profile_form
+msgid "Grupper / Rättigheter"
+msgstr "Grupper / Rättigheter"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile__id
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_save_wizard__id
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: elevata_base
+#: model:hr.job,name:elevata_base.job_installation_technician
+msgid "Installation Technician"
+msgstr "Installationstekniker"
+
+#. module: elevata_base
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_access_profile_save_wizard
+msgid "Kort beskrivning av profilen..."
+msgstr "Kort beskrivning av profilen..."
+
+#. module: elevata_base
+#: model:hr.department,name:elevata_base.dept_customer_service
+msgid "Kundtjänst"
+msgstr "Kundservice"
+
+#. module: elevata_base
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_access_profile_load_wizard
+msgid "Ladda rättigheter"
+msgstr "Ladda rättigheter"
+
+#. module: elevata_base
+#. odoo-python
+#: code:addons/elevata_base/models/res_users.py:0
+#: model:ir.model,name:elevata_base.model_elevata_access_profile_wizard
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_access_profile_load_wizard
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_users_form_access_profile
+#, python-format
+msgid "Ladda rättighetsprofil"
+msgstr "Ladda rättighetsprofil"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile__write_uid
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_save_wizard__write_uid
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile__write_date
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_save_wizard__write_date
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_wizard__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: elevata_base
+#: model:hr.department,name:elevata_base.dept_management
+msgid "Ledning"
+msgstr "Ledning"
+
+#. module: elevata_base
+#: model:res.groups,name:elevata_base.group_manager
+msgid "Manager"
+msgstr "Chef"
+
+#. module: elevata_base
+#: model:hr.department,name:elevata_base.dept_modernisering
+msgid "Modernisering"
+msgstr "Modernisering"
+
+#. module: elevata_base
+#: model:hr.department,name:elevata_base.dept_nyhiss
+msgid "Nyhiss"
+msgstr "Nyhiss"
+
+#. module: elevata_base
+#: model:res.groups,comment:elevata_base.group_sales
+msgid "Offers, contracts, elevators — NOT accounting/configuration"
+msgstr "Offerter, avtal, hissar — INTE ekonomi/konfiguration"
+
+#. module: elevata_base
+#: model:ir.model.fields,help:elevata_base.field_elevata_access_profile_wizard__replace
+msgid ""
+"Om aktivt ersätts alla rättigheter. Om inaktivt läggs profilens rättigheter "
+"till."
+msgstr "Om aktivt ersätts alla rättigheter. Om inaktivt läggs profilens rättigheter \"\"till."
+
+#. module: elevata_base
+#: model_terms:hr.job,description:elevata_base.job_administrator
+#: model_terms:hr.job,description:elevata_base.job_ceo
+#: model_terms:hr.job,description:elevata_base.job_customer_service_agent
+#: model_terms:hr.job,description:elevata_base.job_elevator_technician
+#: model_terms:hr.job,description:elevata_base.job_finance_manager
+#: model_terms:hr.job,description:elevata_base.job_installation_technician
+#: model_terms:hr.job,description:elevata_base.job_project_manager
+#: model_terms:hr.job,description:elevata_base.job_sales_representative
+#: model_terms:hr.job,description:elevata_base.job_service_technician
+msgid ""
+"Perform assigned responsibilities, collaborate with team members, and adhere"
+" to company policies. Strong communication, problem-solving, and work ethic "
+"required. Adaptability, initiative, and willingness to learn are valued."
+msgstr "Perform assigned responsibilities, collaborate with team members, and adhere\"\" to company policies. Strong communication, problem-solving, and work ethic \"\"required. Adaptability, initiative, and willingness to learn are valued."
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile__name
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_save_wizard__name
+msgid "Profilnamn"
+msgstr "Profilnamn"
+
+#. module: elevata_base
+#: model:hr.job,name:elevata_base.job_project_manager
+msgid "Project Manager"
+msgstr "Projektledare"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_save_wizard__group_ids
+msgid "Rättigheter"
+msgstr "Rättigheter"
+
+#. module: elevata_base
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_access_profile_save_wizard
+msgid "Rättigheter som sparas"
+msgstr "Rättigheter som sparas"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_wizard__profile_id
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_access_profile_form
+msgid "Rättighetsprofil"
+msgstr "Rättighetsprofil"
+
+#. module: elevata_base
+#: model:ir.actions.act_window,name:elevata_base.action_access_profile
+#: model:ir.ui.menu,name:elevata_base.menu_access_profile
+msgid "Rättighetsprofiler"
+msgstr "Rättighetsprofiler"
+
+#. module: elevata_base
+#: model:res.groups,name:elevata_base.group_sales
+msgid "Sales"
+msgstr "Säljare"
+
+#. module: elevata_base
+#: model:hr.job,name:elevata_base.job_sales_representative
+msgid "Sales Representative"
+msgstr "Säljare"
+
+#. module: elevata_base
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile__sequence
+msgid "Sequence"
+msgstr "Sekvens"
+
+#. module: elevata_base
+#: model:hr.department,name:elevata_base.dept_service
+msgid "Service"
+msgstr "Service"
+
+#. module: elevata_base
+#: model:hr.job,name:elevata_base.job_service_technician
+msgid "Service Technician"
+msgstr "Servicetekniker"
+
+#. module: elevata_base
+#: model:hr.leave.type,name:elevata_base.leave_sickness
+msgid "Sickness"
+msgstr "Sjukdom"
+
+#. module: elevata_base
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_employee_form_fsm
+msgid "Skapa FSM Worker"
+msgstr "Skapa fältservicetekniker"
+
+#. module: elevata_base
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_access_profile_save_wizard
+msgid "Spara profil"
+msgstr "Spara profil"
+
+#. module: elevata_base
+#: model:ir.model,name:elevata_base.model_elevata_access_profile_save_wizard
+msgid "Spara rättighetsprofil"
+msgstr "Spara rättighetsprofil"
+
+#. module: elevata_base
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_users_form_access_profile
+msgid "Spara som profil"
+msgstr "Spara som profil"
+
+#. module: elevata_base
+#. odoo-python
+#: code:addons/elevata_base/models/res_users.py:0
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_access_profile_save_wizard
+#, python-format
+msgid "Spara som rättighetsprofil"
+msgstr "Spara som rättighetsprofil"
+
+#. module: elevata_base
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_access_profile_save_wizard
+msgid "T.ex. Hisstekniker"
+msgstr "T.ex. Hisstekniker"
+
+#. module: elevata_base
+#: model:res.groups,name:elevata_base.group_technician
+msgid "Technician"
+msgstr "Tekniker"
+
+#. module: elevata_base
+#: model:hr.department,name:elevata_base.dept_technicians
+msgid "Tekniker"
+msgstr "Hisstekniker"
+
+#. module: elevata_base
+#: model:ir.model,name:elevata_base.model_res_users
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_save_wizard__user_id
+#: model:ir.model.fields,field_description:elevata_base.field_elevata_access_profile_wizard__user_id
+#: model:res.groups,name:elevata_base.group_user
+msgid "User"
+msgstr "Användare"
+
+#. module: elevata_base
+#: model:hr.leave.type,name:elevata_base.leave_vacation
+msgid "Vacation"
+msgstr "Semester"
+
+#. module: elevata_base
+#: model_terms:ir.ui.view,arch_db:elevata_base.view_employee_form_fsm
+msgid "t.ex. 0001"
+msgstr "t.ex. 0001"
+
+#. module: elevata_base
+#: model:ir.model,name:elevata_base.model_elevata_access_profile
+msgid "Åtkomstprofil"
+msgstr "Åtkomstprofil"

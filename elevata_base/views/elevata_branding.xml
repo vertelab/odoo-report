@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Elevata-favicon + titel på backend/login-sidor -->
+    <template id="layout_branding" inherit_id="web.layout" name="Elevata branding">
+        <xpath expr="//link[@rel='shortcut icon']" position="attributes">
+            <attribute name="type">image/png</attribute>
+            <attribute name="t-att-href">'/elevata_base/static/src/img/favicon.png'</attribute>
+        </xpath>
+        <xpath expr="//head/title" position="replace">
+            <title t-esc="title or 'Elevata'"/>
+        </xpath>
+    </template>
+</odoo>
