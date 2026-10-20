@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="gotenberg_enabled" model="ir.config_parameter">
+        <field name="key">elevata_gotenberg.enabled</field>
+        <field name="value">True</field>
+    </record>
+    <record id="gotenberg_url" model="ir.config_parameter">
+        <field name="key">elevata_gotenberg.url</field>
+        <field name="value">http://gotenberg:3000</field>
+    </record>
+    <record id="gotenberg_timeout" model="ir.config_parameter">
+        <field name="key">elevata_gotenberg.timeout</field>
+        <field name="value">60</field>
+    </record>
+
+</odoo>

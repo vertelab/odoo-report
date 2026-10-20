@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_gotenberg" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.gotenberg</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Gotenberg PDF"
+                     string="Gotenberg PDF"
+                     name="elevata_gotenberg"
+                     groups="base.group_system">
+                    <h2>Gotenberg PDF</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="gotenberg_enabled"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="gotenberg_enabled"/>
+                                <div class="text-muted">
+                                    Använd Gotenberg för PDF-generering istället för wkhtmltopdf
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container"
+                         invisible="not gotenberg_enabled">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="gotenberg_url"/>
+                                <field name="gotenberg_url" placeholder="http://gotenberg:3000"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="gotenberg_timeout"/>
+                                <field name="gotenberg_timeout"/>
+                            </div>
+                        </div>
+                    </div>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

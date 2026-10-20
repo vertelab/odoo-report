@@ -1,0 +1,56 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* elevata_gotenberg
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20260317\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-18 13:13+0000\n"
+"PO-Revision-Date: 2026-10-18 13:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: elevata_gotenberg
+#: model:ir.model.fields,field_description:elevata_gotenberg.field_res_config_settings__gotenberg_enabled
+msgid "Aktivera Gotenberg PDF"
+msgstr "Aktivera Gotenberg PDF"
+
+#. module: elevata_gotenberg
+#: model_terms:ir.ui.view,arch_db:elevata_gotenberg.res_config_settings_view_form_gotenberg
+msgid "Använd Gotenberg för PDF-generering istället för wkhtmltopdf"
+msgstr "Använd Gotenberg för PDF-generering istället för wkhtmltopdf"
+
+#. module: elevata_gotenberg
+#: model:ir.model,name:elevata_gotenberg.model_res_config_settings
+msgid "Config Settings"
+msgstr "Inställningar"
+
+#. module: elevata_gotenberg
+#: model_terms:ir.ui.view,arch_db:elevata_gotenberg.res_config_settings_view_form_gotenberg
+msgid "Gotenberg PDF"
+msgstr "Gotenberg PDF"
+
+#. module: elevata_gotenberg
+#: model:ir.model.fields,field_description:elevata_gotenberg.field_res_config_settings__gotenberg_url
+msgid "Gotenberg URL"
+msgstr "Gotenberg URL"
+
+#. module: elevata_gotenberg
+#: model:ir.model,name:elevata_gotenberg.model_ir_actions_report
+msgid "Report Action"
+msgstr "Rapportera åtgärder"
+
+#. module: elevata_gotenberg
+#: model:ir.model.fields,field_description:elevata_gotenberg.field_res_config_settings__gotenberg_timeout
+msgid "Timeout (sekunder)"
+msgstr "Timeout (sekunder)"
+
+#. module: elevata_gotenberg
+#: model_terms:ir.ui.view,arch_db:elevata_gotenberg.res_config_settings_view_form_gotenberg
+msgid "http://gotenberg:3000"
+msgstr "http://gotenberg:3000"
