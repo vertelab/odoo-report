@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_maintenance_equipment_map" model="ir.actions.act_window">
+        <field name="name">Elevators on Map</field>
+        <field name="res_model">maintenance.equipment</field>
+        <field name="view_mode">googlemap</field>
+        <field name="domain">[('is_elevator', '=', True)]</field>
+        <field name="context">{'search_default_is_elevator': 1}</field>
+    </record>
+
+    <record id="maintenance_equipment_list_inherit_map" model="ir.ui.view">
+        <field name="name">maintenance.equipment.list.inherit.map</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="elevata_fsm_flow.view_maintenance_equipment_elevator_list_fsm_flow"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button string="Show on Map"
+                            type="action"
+                            name="%(elevata_googlemap_hiss.action_maintenance_equipment_map)d"
+                            icon="fa-map-marker"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="maintenance_equipment_search_inherit_map" model="ir.ui.view">
+        <field name="name">maintenance.equipment.search.inherit.map</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="elevator_number" string="Elevator Number"/>
+                <field name="elevator_type_id" string="Elevator Type"/>
+                <field name="control_system_id" string="Control System"/>
+                <field name="inspection_company_id" string="Inspection Company"/>
+                <field name="mechanical_brand_id" string="Mechanical Brand"/>
+            </field>
+            <xpath expr="//filter[@name='owner']" position="after">
+                <filter string="Elevator Type" name="group_by_elevator_type"
+                        context="{'group_by': 'elevator_type_id'}"/>
+                <filter string="Control System" name="group_by_control_system"
+                        context="{'group_by': 'control_system_id'}"/>
+                <filter string="Inspection Company" name="group_by_inspection_company"
+                        context="{'group_by': 'inspection_company_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_maintenance_equipment_hiss_map" model="ir.ui.view">
+        <field name="name">maintenance.equipment.hiss.map</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="type">googlemap</field>
+        <field name="arch" type="xml">
+            <googlemap
+                js_class="hiss_map"
+                hide_partner_list="1"
+                res_partner="partner_id"
+                default_latitude="57.7089"
+                default_longitude="11.9746"
+                panel_title="Elevators"
+                limit="500">
+                <field name="partner_id"/>
+                <field name="name"/>
+                <field name="elevator_number"/>
+                <field name="elevator_type_id"/>
+                <field name="manufacturing_number"/>
+                <field name="mechanical_brand_id"/>
+                <field name="last_inspection"/>
+            </googlemap>
+        </field>
+    </record>
+
+    <!-- Odoo 18 has no single action_equipment for maintenance.equipment,
+         so the elevator list action is defined here and the map is added
+         to its view_mode. -->
+    <record id="action_elevator_list_with_map" model="ir.actions.act_window">
+        <field name="name">Elevators</field>
+        <field name="res_model">maintenance.equipment</field>
+        <field name="view_mode">list,form,googlemap</field>
+        <field name="domain">[('is_elevator', '=', True)]</field>
+        <field name="context">{'default_is_elevator': True}</field>
+    </record>
+
+</odoo>

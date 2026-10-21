@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="elevata_googlemap_hiss.MapMarkerContent">
+        <div class="o_map_popup">
+            <h5><t t-out="record.name"/></h5>
+            <div class="elevator-info">
+                <p><strong>Elevator no:</strong> <t t-out="record.elevator_number"/></p>
+                <p t-if="record.elevator_type_id"><strong>Type:</strong> <t t-out="record.elevator_type_id[1]"/></p>
+                <p t-if="record.manufacturing_number"><strong>Manufacturing no:</strong> <t t-out="record.manufacturing_number"/></p>
+                <p t-if="record.mechanical_brand_id"><strong>Brand:</strong> <t t-out="record.mechanical_brand_id[1]"/></p>
+                <p t-if="record.last_inspection"><strong>Last inspection:</strong> <t t-out="record.last_inspection"/></p>
+            </div>
+        </div>
+    </t>
+</templates>

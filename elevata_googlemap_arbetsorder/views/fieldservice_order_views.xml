@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="fieldservice_order_search_inherit_map" model="ir.ui.view">
+        <field name="name">fieldservice.order.search.inherit.map</field>
+        <field name="model">fieldservice.order</field>
+        <field name="inherit_id" ref="fieldservice_vrtl.view_fieldservice_order_search"/>
+        <field name="arch" type="xml">
+            <filter name="my_orders" position="after">
+                <filter string="Service" name="type_service" domain="[('product_type.name', '=', 'Service')]"/>
+                <filter string="Troubleshooting" name="type_troubleshooting" domain="[('product_type.name', '=', 'Troubleshooting')]"/>
+                <filter string="New Installation" name="type_new_installation" domain="[('product_type.name', '=', 'New Installation')]"/>
+                <filter string="Modernization" name="type_modernization" domain="[('product_type.name', '=', 'Modernization')]"/>
+                <filter string="Upgrade" name="type_upgrade" domain="[('product_type.name', '=', 'Upgrade')]"/>
+                <filter string="Repair" name="type_repair" domain="[('product_type.name', '=', 'Repair')]"/>
+                <filter string="Inspection" name="type_inspection" domain="[('product_type.name', '=', 'Inspection')]"/>
+                <separator/>
+                <filter string="Order Type" name="group_by_product_type"
+                        context="{'group_by': 'product_type'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_fieldservice_order_map" model="ir.ui.view">
+        <field name="name">fieldservice.order.map</field>
+        <field name="model">fieldservice.order</field>
+        <field name="type">googlemap</field>
+        <field name="arch" type="xml">
+            <googlemap
+                js_class="order_map"
+                hide_partner_list="1"
+                res_partner="partner_id"
+                default_latitude="57.7089"
+                default_longitude="11.9746"
+                panel_title="Work Orders"
+                limit="500">
+                <field name="name"/>
+                <field name="equipment_id"/>
+                <field name="product_type"/>
+                <field name="description"/>
+                <field name="reporter"/>
+                <field name="reporter_phone"/>
+                <field name="requested_employee_ids"/>
+                <field name="stage_id"/>
+                <field name="planned_start_datetime"/>
+            </googlemap>
+        </field>
+    </record>
+
+    <record id="elevata_fsm_flow.action_fsm_dash_order" model="ir.actions.act_window">
+        <field name="view_mode">kanban,list,form,googlemap</field>
+    </record>
+
+    <record id="elevata_fsm_flow.action_fsm_my_orders" model="ir.actions.act_window">
+        <field name="view_mode">kanban,list,form,calendar,googlemap</field>
+    </record>
+
+</odoo>

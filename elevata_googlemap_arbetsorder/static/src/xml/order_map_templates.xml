@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="elevata_googlemap_arbetsorder.MapMarkerContent">
+        <div class="o_map_popup">
+            <h5><t t-out="record.name"/></h5>
+            <div class="order-info">
+                <p t-if="record.equipment_id"><strong>Lift:</strong> <t t-out="record.equipment_id[1]"/></p>
+                <p t-if="record.reporter"><strong>Reporter:</strong> <t t-out="record.reporter[1]"/></p>
+                <p t-if="record.reporter_phone"><strong>Phone:</strong> <t t-out="record.reporter_phone"/></p>
+                <p t-if="record.stage_id"><strong>Stage:</strong> <t t-out="record.stage_id[1]"/></p>
+                <p t-if="record.planned_start_datetime"><strong>Planned start:</strong> <t t-out="record.planned_start_datetime"/></p>
+            </div>
+        </div>
+    </t>
+</templates>
