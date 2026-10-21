@@ -1,5 +1,6 @@
 import io
 import logging
+from collections import OrderedDict
 import re
 
 import requests
@@ -78,51 +79,62 @@ class IrActionsReportGotenberg(models.Model):
         if isinstance(res_ids, int):
             res_ids = [res_ids]
 
-        # Let the parent build the attachment cache first. Any record that
-        # already has a stream is skipped, exactly as wkhtmltopdf would.
-        collected_streams, report_type = super()._render_qweb_pdf_prepare_streams(
-            report_ref, data, res_ids=res_ids)
-        if report_type != 'pdf':
-            return collected_streams, report_type
+        # Honour the attachment cache: if a stored PDF already exists for a
+        # record, reuse it instead of re-rendering. Only records WITHOUT a
+        # cached attachment are rendered through Gotenberg.
+        collected_streams = OrderedDict()
+        pending = list(res_ids or [])
+        if res_ids and report.attachment and not self._context.get('report_pdf_no_attachment'):
+            records = self.env[report.model].browse(res_ids)
+            still_pending = []
+            for record in records:
+                attachment = report.retrieve_attachment(record)
+                if attachment:
+                    collected_streams[record.id] = {
+                        'stream': io.BytesIO(attachment.raw),
+                        'attachment': attachment,
+                    }
+                else:
+                    still_pending.append(record.id)
+            pending = still_pending
 
-        # A PDF was already produced by the parent (e.g. every record had
-        # an attachment). Nothing left to do.
-        pending = [
-            res_id for res_id, stream_data in collected_streams.items()
-            if not stream_data.get('stream')
-        ]
         if not pending and collected_streams:
-            return collected_streams, report_type
+            return collected_streams
 
         try:
             pdf_content = self._render_pdf_via_gotenberg(
-                report, res_ids or [False], data, config)
+                report, pending or [False], data, config)
         except Exception as exc:  # noqa: BLE001 - deliberate fallback
             _logger.warning(
-                'Gotenberg failed for %s (%s) — falling back to wkhtmltopdf',
+                'Gotenberg failed for %s (%s) - falling back to wkhtmltopdf',
                 report.report_name, exc,
             )
             return super()._render_qweb_pdf_prepare_streams(
                 report_ref, data, res_ids=res_ids)
 
-        if not res_ids:
-            return {
-                False: {
-                    'stream': io.BytesIO(pdf_content),
-                    'attachment': None,
-                },
-            }, report_type
+        if not pending:
+            collected_streams[False] = {
+                'stream': io.BytesIO(pdf_content),
+                'attachment': None,
+            }
+            return collected_streams
 
         # One record: the whole PDF belongs to it.
         if len(pending) == 1:
-            collected_streams[pending[0]]['stream'] = io.BytesIO(pdf_content)
-            return collected_streams, report_type
+            collected_streams[pending[0]] = {
+                'stream': io.BytesIO(pdf_content),
+                'attachment': None,
+            }
+            return collected_streams
 
         # Several records: Gotenberg returns one document. Attach it to the
-        # first pending record and let the rest fall through to wkhtmltopdf
-        # rather than guessing at page boundaries.
-        collected_streams[pending[0]]['stream'] = io.BytesIO(pdf_content)
-        return collected_streams, report_type
+        # first record and let the rest fall through to wkhtmltopdf rather
+        # than guessing at page boundaries.
+        collected_streams[pending[0]] = {
+            'stream': io.BytesIO(pdf_content),
+            'attachment': None,
+        }
+        return collected_streams
 
     def _render_pdf_via_gotenberg(self, report, res_ids, data, config):
         """Render the report to HTML and hand it to Gotenberg."""
@@ -186,17 +198,19 @@ class IrActionsReportGotenberg(models.Model):
         """
         base_url = self.env['ir.config_parameter'].sudo().get_param(
             'web.base.url', 'http://localhost:8069').rstrip('/')
-        if base_url and base_url != 'http://web:8069':
-            html_str = html_str.replace(base_url, 'http://web:8069')
+        if base_url and base_url != 'http://localhost:8069':
+            html_str = html_str.replace(base_url, 'http://localhost:8069')
 
         html_str = html_str.replace(
-            'http://localhost:8069', 'http://web:8069')
+            'http://localhost:8069', 'http://localhost:8069')
         html_str = html_str.replace(
-            'https://localhost:8069', 'http://web:8069')
+            'https://localhost:8069', 'http://localhost:8069')
 
+        # Chromium inside Gotenberg refuses file:/// URLs. Rewrite every
+        # local asset path to the Odoo container, which serves /web/assets.
         html_str = re.sub(
-            r'file:///[^"\']*?(/web/assets/[^"\']+)',
-            r'http://web:8069\1',
+            r'file:///([^"\'\s)]+)',
+            lambda m: 'http://localhost:8069/' + m.group(1),
             html_str,
         )
 
