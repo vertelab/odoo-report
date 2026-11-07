@@ -12,6 +12,6 @@
         'views/data_backup_views.xml',
         'data/cron.xml',
     ],
-    'installable': True,
+    'installable': False,
     'application': False,
 }
