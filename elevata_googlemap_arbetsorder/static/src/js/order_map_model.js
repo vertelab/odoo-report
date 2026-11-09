@@ -44,15 +44,25 @@ export class OrderMapModel extends MapModel {
         data.records = result.records || [];
         data.count = result.length || 0;
 
-        // res_partner on the googlemap view is partner_id, so the base
-        // MapModel already attaches record.partner. Nothing to re-map here;
-        // only count what actually has coordinates.
+        // res_partner on the googlemap view is location_id, which is an
+        // fsm.location and not a res.partner. The base MapModel only attaches
+        // record.partner when the res_partner field points straight at a
+        // partner, so build it here from the location's coordinates.
         for (const record of data.records) {
+            const location = record.location_id;
             if (
-                record.partner &&
-                record.partner.partner_latitude &&
-                record.partner.partner_longitude
+                location &&
+                location.partner_latitude &&
+                location.partner_longitude
             ) {
+                record.partner = {
+                    id: location.id,
+                    name: location.display_name,
+                    partner_latitude: location.partner_latitude,
+                    partner_longitude: location.partner_longitude,
+                    complete_contact_address:
+                        location.complete_contact_address || "",
+                };
                 data.locatedRecordsCount++;
             }
         }
@@ -71,14 +81,14 @@ export class OrderMapModel extends MapModel {
         const specification = {};
         const requiredFields = [
             "name",
-            "product_type",
+            "type",
             "description",
             "reporter",
             "reporter_phone",
-            "requested_employee_ids",
-            "equipment_id",
-            "partner_id",
+            "person_id",
+            "location_id",
             "stage_id",
+            "scheduled_date_start",
         ];
 
         for (const fieldName of [...new Set([...fieldNames, ...requiredFields])]) {
@@ -86,9 +96,15 @@ export class OrderMapModel extends MapModel {
             if (!field) {
                 specification[fieldName] = {};
             } else if (field.type === "many2one") {
-                if (fieldName === "product_type") {
+                if (fieldName === "location_id") {
                     specification[fieldName] = {
-                        fields: { id: {}, display_name: {}, name: {}, color: {} },
+                        fields: {
+                            id: {},
+                            display_name: {},
+                            partner_latitude: {},
+                            partner_longitude: {},
+                            complete_contact_address: {},
+                        },
                     };
                 } else {
                     specification[fieldName] = {

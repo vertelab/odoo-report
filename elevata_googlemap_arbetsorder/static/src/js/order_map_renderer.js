@@ -12,23 +12,23 @@ export class OrderMapRenderer extends MapRenderer {
         const recordsHtml = records
             .map((record) => {
                 const name = record.name || record.display_name || "";
-                const equipment = record.equipment_id
-                    ? record.equipment_id.display_name ||
-                      record.equipment_id.name ||
-                      record.equipment_id[1]
+                const location = record.location_id
+                    ? record.location_id.display_name ||
+                      record.location_id[1]
                     : "";
-                const reporter = record.reporter
-                    ? record.reporter.display_name ||
-                      record.reporter.name ||
-                      record.reporter[1]
+                const orderType = record.type
+                    ? record.type.display_name || record.type[1]
                     : "";
+                // reporter is a Char on fsm.order (elevata_fsm_flow), not a
+                // many2one — read it as a plain string.
+                const reporter = record.reporter || "";
                 const phone = record.reporter_phone || "";
                 const stage = record.stage_id
                     ? record.stage_id.display_name ||
                       record.stage_id.name ||
                       record.stage_id[1]
                     : "";
-                const planned = record.planned_start_datetime || "";
+                const planned = record.scheduled_date_start || "";
                 const description = record.description || "";
 
                 return `
@@ -43,7 +43,8 @@ export class OrderMapRenderer extends MapRenderer {
                         </h3>
                     </div>
                     <div style="display: grid; grid-template-columns: auto 1fr; gap: 5px; margin-bottom: 10px;">
-                        ${equipment ? `<div style="font-weight: bold; color: #666;">Lift:</div><div>${equipment}</div>` : ""}
+                        ${location ? `<div style="font-weight: bold; color: #666;">Elevator:</div><div>${location}</div>` : ""}
+                        ${orderType ? `<div style="font-weight: bold; color: #666;">Order type:</div><div>${orderType}</div>` : ""}
                         ${reporter ? `<div style="font-weight: bold; color: #666;">Reporter:</div><div>${reporter}</div>` : ""}
                         ${phone ? `<div style="font-weight: bold; color: #666;">Phone:</div><div>${phone}</div>` : ""}
                         ${stage ? `<div style="font-weight: bold; color: #666;">Stage:</div><div>${stage}</div>` : ""}

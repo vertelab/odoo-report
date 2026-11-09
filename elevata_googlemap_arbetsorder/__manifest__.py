@@ -1,16 +1,16 @@
 {
     'name': 'Elevata Google Map Work Order View',
-    'version': '18.0.1.0.0',
+    'version': '18.0.1.0.1',
     'author': 'Elevata',
     'website': 'https://www.elevata.se',
     'license': 'LGPL-3',
     'category': 'Extra Tools',
-    'summary': 'Google Maps view for field service work orders',
+    'summary': 'Google Maps view for FSM work orders',
     'depends': [
         'elevata_googlemap',
         'elevata_fsm_flow',
         'contacts',
-        'fieldservice_order_type_color',
+        'elevata_order_types',
     ],
     'data': [
         'views/fieldservice_order_views.xml',
