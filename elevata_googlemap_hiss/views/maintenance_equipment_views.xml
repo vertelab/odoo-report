@@ -12,7 +12,7 @@
     <record id="maintenance_equipment_list_inherit_map" model="ir.ui.view">
         <field name="name">maintenance.equipment.list.inherit.map</field>
         <field name="model">maintenance.equipment</field>
-        <field name="inherit_id" ref="elevata_fsm_flow.view_maintenance_equipment_elevator_list_fsm_flow"/>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_tree"/>
         <field name="arch" type="xml">
             <!-- A list view has no header: the "Show on Map" entry point is
                  the action's own menu item and the search panel. Putting a
