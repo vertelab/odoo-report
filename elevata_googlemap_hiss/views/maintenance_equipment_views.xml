@@ -14,13 +14,11 @@
         <field name="model">maintenance.equipment</field>
         <field name="inherit_id" ref="elevata_fsm_flow.view_maintenance_equipment_elevator_list_fsm_flow"/>
         <field name="arch" type="xml">
+            <!-- A list view has no header: the "Show on Map" entry point is
+                 the action's own menu item and the search panel. Putting a
+                 <header> inside <list> fails view validation. -->
             <xpath expr="//list" position="inside">
-                <header>
-                    <button string="Show on Map"
-                            type="action"
-                            name="%(elevata_googlemap_hiss.action_maintenance_equipment_map)d"
-                            icon="fa-map-marker"/>
-                </header>
+                <field name="property_id" optional="show"/>
             </xpath>
         </field>
     </record>
