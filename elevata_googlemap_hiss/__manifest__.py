@@ -7,7 +7,7 @@
     'category': 'Extra Tools',
     'summary': 'Google Maps view for elevator equipment',
     'depends': [
-        'elevata_googlemap',
+        'web_googlemap',
         'elevata_fsm_flow',
         'maintenance_elevator',
     ],

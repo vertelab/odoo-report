@@ -7,7 +7,7 @@
     'category': 'Extra Tools',
     'summary': 'Google Maps view for FSM work orders',
     'depends': [
-        'elevata_googlemap',
+        'web_googlemap',
         'elevata_fsm_flow',
         'contacts',
         'elevata_order_types',
